@@ -6,6 +6,12 @@
 
 <script>
 export default {
+    name: 'CustomerLogin',
+    data(){
+        return{
+
+        }
+    },
     
 }
 </script>
