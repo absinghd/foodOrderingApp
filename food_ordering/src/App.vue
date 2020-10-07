@@ -1,60 +1,57 @@
 <template>
-  <v-app>
+  <v-app class="mainContainer"> 
+    <div v-if="admin">
+ <v-card
+    class="mx-auto overflow-hidden"
+  >
     <v-app-bar
-      app
-      color="primary"
+      color="#FE724C"
       dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+      <v-app-bar-nav-icon @click="setDrawerTrue"></v-app-bar-nav-icon>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-toolbar-title>Admin Navbar</v-toolbar-title>
     </v-app-bar>
+    
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+  </v-card>
+    </div>
+
+
+    <div v-if="!admin">
+      <Navbar></Navbar>
+    </div>
+    <router-view/>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Navbar from './components/layout/Navbar';
+
 
 export default {
   name: 'App',
-
-  components: {
-    HelloWorld,
+  data(){
+    return{
+      admin: this.$store.getters.getAdmin,
+      //drawer: this.$store.getters.getDrawer,
+      group:null,
+    }
   },
-
-  data: () => ({
-    //
-  }),
-};
+  components: {
+    Navbar, 
+  },
+  methods:{
+    setDrawerTrue(){
+      this.$store.commit("setDrawerTrue");
+      // this.drawer = this.$store.getters.getDrawer
+    }
+  }
+}
 </script>
+
+<style scoped>
+.mainContainer{
+  background-color: #FFE9AE;
+}
+</style>

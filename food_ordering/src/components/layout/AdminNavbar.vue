@@ -1,15 +1,15 @@
 <template>
     <div>
-        
+        <v-btn block color='primary' large>Admin navbar</v-btn>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'AdminHome',
+    name: 'AdminNavbar',
     data(){
         return{
-            user: this.$store.getters.getUser,
+
         }
     },
 
