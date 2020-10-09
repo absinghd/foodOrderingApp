@@ -1,7 +1,9 @@
 <template>
 
   <v-app class="mainContainer">
-          <v-navigation-drawer
+    
+    
+    <v-navigation-drawer
       v-model="drawer"
       absolute
       temporary
@@ -42,6 +44,13 @@
             <v-list-item-title>Current Order</v-list-item-title>
           </v-list-item>
 
+            <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+
 
         </v-list-item-group>
       </v-list>
@@ -50,7 +59,7 @@
 <div class="button">
 <div class="cooks" v-for="(cook, i) in cooks" :key="i" @click="cookMenu(cook)">
     <v-btn elevation="2"
-  large block color="#FFC529"> {{cook}}</v-btn>
+  large block color="#FFC529"> {{cook.name}}</v-btn>
   </div>
   </div>
 
@@ -59,13 +68,15 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
     name: 'CustomerHome',
     data(){
         return{
             user: this.$store.getters.getUser,
             group:null,
-            cooks:this.$store.getters.getCooks,
+            cooks:[]
            
 
         }
@@ -90,8 +101,25 @@ export default {
         params: { user: this.user, cook: cook, },
       })
         }
+    },
+    created(){
+        const db = firebase.firestore();
+        //get all the cooks
+        db.collection("cooks")     
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            let cook = doc.data();
+            this.cooks.push(cook)
+          })})
+        console.log(this.cooks);
+        this.user = this.$store.getters.getUser;
+        this.$store.commit("setCooks", this.cooks);
+        //
     }
+    
 }
+
 </script>
 
 <style scoped>

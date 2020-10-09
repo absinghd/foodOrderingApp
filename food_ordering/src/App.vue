@@ -10,7 +10,7 @@
     >
       <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Customer Navbar</v-toolbar-title>
+      <v-toolbar-title>{{ this.navbarTitle }}</v-toolbar-title>
     </v-app-bar>
     
 
@@ -36,6 +36,7 @@ export default {
       admin: this.$store.getters.getAdmin,
       drawer: this.$store.getters.getDrawer,
       navbarTitle: this.$store.getters.getNavbarTitle,
+      user: this.$store.getters.getUser,
     }
   },
   components: {
@@ -59,6 +60,11 @@ export default {
       this.drawer= this.$store.getters.getDrawer;
       //console.log(this.drawer);
     }
+  },
+  created(){
+    this.user = this.$store.getters.getUser;
+    this.navbarTitle = this.$store.getters.getNavbarTitle;
+    //console.log(this.navbarTitle);
   }
 }
 </script>

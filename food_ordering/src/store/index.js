@@ -9,7 +9,7 @@ export default new Vuex.Store({
     user: null,
     admin: false,
     drawer: null,
-    cooks:['Bicky Singh', 'Holly Vu', 'Bro'],
+    cooks:null,
     navbarTitle: null
   },
   getters:{
@@ -24,7 +24,9 @@ export default new Vuex.Store({
     setAdminTrue: state => {state.admin = true},
     setAdminFalse: state => {state.admin = false},
     setDrawerTrue: state => {state.drawer = true},
-    setDrawerFalse: state => {state.drawer = false}
+    setDrawerFalse: state => {state.drawer = false},
+    setNavbarTitle: (state,title) => {state.navbarTitle = title},
+    setCooks: (state, cooks) => {state.cooks = cooks}
   },
   actions: {
   },
