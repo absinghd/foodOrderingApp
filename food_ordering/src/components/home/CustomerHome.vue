@@ -105,7 +105,7 @@ export default {
     created(){
         const db = firebase.firestore();
         //get all the cooks
-        db.collection("cooks")     
+        db.collection("admin")     
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {

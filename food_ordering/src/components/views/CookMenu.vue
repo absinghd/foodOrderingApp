@@ -17,8 +17,35 @@
         <a>Price: </a><a class="ingredient">{{item.price}}</a>
         </div>
 
+        <div class="counter">
+           <v-btn
+            color="#FFC529"
+            elevation="2"
+            rounded
+            >
+            <a @click="minusItemQuantity(item.name, item.quantity, i)"> <v-icon color="#424242">mdi-minus</v-icon> </a>
+            <a class="quantity"> {{item.quantity}}</a>
+            <a @click="plusItemQuantity(item.name, item.quantity, i)"> <v-icon color="#424242">mdi-plus</v-icon> </a>
+            </v-btn>
+        </div>
+
     </v-card>
 </div>
+
+<div class="placeOrder">
+    <a class="total">Total: </a>
+    <a class="submit"><v-btn
+    @click="placeOrder"
+  elevation="2"
+  color="#FFC529"
+
+>
+Place Order
+</v-btn>
+</a>
+
+</div>
+
 </div>
 
         <div>
@@ -67,7 +94,7 @@
             <v-list-item-title>Current Order</v-list-item-title>
           </v-list-item>
 
-            <v-list-item>
+            <v-list-item @click="logout">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
@@ -77,6 +104,8 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
+
+
 
 
     </v-app>
@@ -94,7 +123,9 @@ export default {
             title: 'cake',
             navbarTitle: this.$store.getters.getNavbarTitle,
             menuItems: [],
+            originalMenu: [],
             user: this.$store.getters.getUser,
+            quantity:0,
             
         }
     },
@@ -123,7 +154,46 @@ export default {
         },
         goCurrentOrder(){
             this.$router.push({ name: "CurrentOrder" })
-        }
+        },
+        minusItemQuantity(item, quantity, i){
+          quantity--;
+          this.menuItems[i].quantity = quantity
+          console.log('order '+quantity +" "+ item);          
+          //console.log(this.menuItems);
+        },
+        plusItemQuantity(item, quantity, i){
+          quantity++;
+          this.menuItems[i].quantity = quantity
+          console.log('order '+quantity +" "+ item);
+          //console.log(this.menuItems);
+        },
+        placeOrder(){
+          console.log('order');
+            console.log(this.menuItems);
+           const db = firebase.firestore();
+           db.collection('orders')
+           .add({
+               customerName: this.user.displayName,
+               customer_uid: this.user.uid,
+               customerEmail: this.user.email,
+               customerPhoneNumber: this.user.phoneNumber,
+               cutomerPhoto: this.user.photoURL,
+               time: Date.now(),
+               menuItems: this.menuItems
+               
+           })
+           console.log('original');
+            console.log(this.originalMenu);
+            console.log(this.user.display);
+          this.$router.push({
+        name: "ThankYou",
+        params: { user: this.user, cook: this.cook, menuItems: this.menuItems},
+      })
+        },
+        logout(){
+        this.$router.push({ 
+    name: "Login"}) 
+        },
     },
     created(){
         this.$store.commit("setNavbarTitle", this.cook);
@@ -138,8 +208,9 @@ export default {
           snapshot.forEach((doc) => {
             let item = doc.data();
             this.menuItems.push(item)
+            this.originalMenu.push(item)
           })})
-          //console.log(this.user.displayName);
+          //console.log(this.quantity);
     }
 }
 </script>
@@ -166,5 +237,23 @@ export default {
 .price{
     text-align: left;
     margin-left: 5px;
+}
+.counter{
+    padding-bottom: 10px;
+    text-align: right;
+    padding-right: 10px
+}
+.quantity{
+    font-size: 1.7em;
+    color: #424242;
+}
+.placeOrder{
+    padding: 10px;
+}
+.submit{
+    text-align: center; 
+}
+.total{
+    text-align: left;
 }
 </style>

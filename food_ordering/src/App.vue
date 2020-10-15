@@ -19,14 +19,29 @@
 
 
     <div v-if="admin">
-      <Navbar></Navbar>
+     
+      <v-card
+    class="mx-auto overflow-hidden"
+  >
+    <v-app-bar
+      color="#FE724C"
+      dark
+    >
+      <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>{{ this.navbarTitle }}</v-toolbar-title>
+    </v-app-bar>
+    
+
+  </v-card>
+
     </div>
     <router-view/>
   </v-app>
 </template>
 
 <script>
-import Navbar from './components/layout/Navbar';
+//import Navbar from './components/layout/Navbar';
 
 
 export default {
@@ -40,7 +55,7 @@ export default {
     }
   },
   components: {
-    Navbar, 
+   // Navbar, 
   },
   methods:{
     setDrawerTrue(){

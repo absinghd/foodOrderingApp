@@ -2,9 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import CustomerHome from '@/components/home/CustomerHome'
 import AdminHome from '@/components/home/AdminHome'
-import CustomerLogin from '@/components/auth/CustomerLogin'
+import Login from '@/components/auth/Login'
 import AdminLogin from '@/components/auth/AdminLogin'
 import CookMenu from '@/components/views/CookMenu'
+import ThankYou from '@/components/views/ThankYou'
+import Orders from '@/components/views/Orders'
 
 Vue.use(VueRouter)
 
@@ -16,8 +18,8 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'CustomerLogin',
-    component: CustomerLogin
+    name: 'Login',
+    component: Login
   },
   {
     path: '/adminLogin',
@@ -34,16 +36,16 @@ const routes = [
     name: 'CookMenu',
     component: CookMenu
   },
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
+  {
+    path: '/thankYou',
+    name: 'ThankYou',
+    component: ThankYou
+  },
+  {
+    path: '/orders',
+    name: 'Orders',
+    component: Orders
+  },
 
 ]
 
