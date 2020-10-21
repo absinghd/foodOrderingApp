@@ -58,22 +58,26 @@
 
 
 
+    <div class="menu" v-for="(item,i) in menu" :key="i">
+      <p>{{item.name}} <a>active: {{item.active}}</a></p>
+
+    </div>
 
 
-
-
-        <a>Menu</a>
     </v-app>
 </template>
 
 
 <script>
+import firebase from 'firebase'
+
 export default {
     name: 'Menu',
     data(){
         return{
           group: null,
-          user: this.$store.getters.getUser,  
+          user: this.$store.getters.getUser,
+          menu:[] 
         }
     },
     computed:{
@@ -99,6 +103,18 @@ export default {
             this.$router.push({ 
             name: "Menu"}) 
         }
+    },
+    created(){
+        const db = firebase.firestore();
+        //get the menu
+        db.collection("menu").where("cook_uid", "==", this.user.uid)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            let item = doc.data();
+            this.menu.push(item)
+          })})
+        console.log(this.menu); 
     }
 
 }

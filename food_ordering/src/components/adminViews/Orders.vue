@@ -55,14 +55,21 @@
 
     </div>
 
+      
+
+    <div class="orders" v-for="(order,i) in orders" :key="i">
+      <p>Name: {{order.customerName}}</p>
+      <p>Order:</p>
+      <p v-for="(item,i) in order.menuItems" :key="i">
+        <a>{{item.quantity}} </a>
+        <a>{{item.name}}</a>
+      </p>
 
 
 
+    </div>
 
 
-
-
-        <a>orders</a>
     </v-app>
 </template>
 
@@ -106,9 +113,8 @@ export default {
     created(){
         const db = firebase.firestore();
         //get all the orders
-        const de = db.collection("orders").where("menuItems.cook_uid", "==", "this.user.uid");
-      
-        de.get()
+        db.collection("orders").where("cook_uid", "==", this.user.uid)
+        .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             let order = doc.data();

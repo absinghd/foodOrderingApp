@@ -178,6 +178,7 @@ export default {
                customerEmail: this.user.email,
                customerPhoneNumber: this.user.phoneNumber,
                cutomerPhoto: this.user.photoURL,
+               cook_uid: this.cook.uid,
                time: Date.now(),
                menuItems: this.menuItems
                
