@@ -92,6 +92,20 @@ export default {
            } 
         },
     },
+    methods:{
+        goCustomerHome(){
+            this.$router.push({ name: "CustomerHome" })
+        },
+        goCustomerProfile(){
+            this.$router.push({ name: "CustomerProfile" })
+        },
+        goCustomerHistory(){
+            this.$router.push({ name: "CustomerHistory" })
+        },
+        goCurrentOrder(){
+            this.$router.push({ name: "CurrentOrder" })
+        },
+    }
 }
 </script>
 
