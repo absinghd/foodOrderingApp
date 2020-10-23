@@ -1,5 +1,60 @@
 <template>
     <v-app class="mainContainer">
+
+            <div class="drawer">
+
+        <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-orange--text text--accent-3"
+        >
+          <v-list-item @click="gotoOrders">
+            <v-list-item-icon>
+              <v-icon>mdi-cart-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Orders</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="gotoMenu">
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Menu</v-list-item-title>
+          </v-list-item>
+
+            <!-- <v-list-item @click="goCustomerHistory"> -->
+            <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-history</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Past Orders</v-list-item-title>
+          </v-list-item>
+
+
+
+            <v-list-item @click="logout">
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+
+    </div>
+
+
         
 
         <a>Thanks placing your order {{this.user.displayName}}!</a>
@@ -19,10 +74,24 @@ export default {
         return{
             user: this.$route.params.user,
             cook:this.$route.params.cook,
-            menuItems: this.$route.params.menuItems
+            menuItems: this.$route.params.menuItems,
+            group: null,
 
         }
-    }
+    },
+    computed:{
+        // drawer(){
+        //     return this.$store.getters.getDrawer;
+
+        drawer: {
+           get(){
+             return this.$store.getters.getDrawer;
+           },
+           set(){
+             return null
+           } 
+        },
+    },
 }
 </script>
 
