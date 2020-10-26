@@ -55,7 +55,61 @@
 
     </div>
 
+                                <!-- <div class="tab">
+
+                                  <v-tabs
+                                    fixed-tabs
+                                    background-color=#ffe9ae
+                                    color=#424242
+                                  >
+                                    <v-tab>
+                                      Open Orders
+                                    </v-tab>
+
+                                    <v-tab>
+                                      Completed
+                                    </v-tab>
+                                    
+                                  </v-tabs>
+
+                                </div> -->
+
+
       
+
+                        <!-- <div class="orders" v-for="(order,i) in orders" :key="i">
+                          <p>Name: {{order.customerName}}</p>
+                          <p>Order:</p>
+                          <p v-for="(item,i) in order.menuItems" :key="i">
+                            <a>{{item.quantity}} </a>
+                            <a>{{item.name}}</a>
+                          </p>
+                        </div> -->
+
+
+
+<div class="tabs">
+
+    <v-card>
+    <v-tabs
+      v-model="tab"
+      background-color="primary"
+      dark
+    >
+      <v-tab
+        v-for="item in items"
+        :key="item.tab"
+      >
+        {{ item.tab }}
+      </v-tab>
+
+
+    </v-tabs>
+
+<v-card class="content">
+  <div v-for="(item, i) in items" :key="i">
+     <a>{{ item.tab }}</a>
+  </div>
 
     <div class="orders" v-for="(order,i) in orders" :key="i">
       <p>Name: {{order.customerName}}</p>
@@ -64,10 +118,12 @@
         <a>{{item.quantity}} </a>
         <a>{{item.name}}</a>
       </p>
-
-
-
     </div>
+</v-card>
+  </v-card>
+
+
+</div>
 
 
     </v-app>
@@ -83,7 +139,11 @@ export default {
         return{
           group: null,
           user: this.$store.getters.getUser,
-          orders:[],  
+          orders:[],
+          tab: null,
+        items: [
+          { tab: 'Open Orders', context: 'test open'},
+          { tab: 'Completed', content: 'Tab 2 Content' },],
         }
     },
     computed:{
@@ -131,5 +191,8 @@ export default {
 <style scoped>
 .mainContainer {
   background-color: #ffe9ae;
+}
+.tab {
+  color: #424242;
 }
 </style>

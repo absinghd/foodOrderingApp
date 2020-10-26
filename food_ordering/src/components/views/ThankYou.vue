@@ -105,6 +105,10 @@ export default {
         goCurrentOrder(){
             this.$router.push({ name: "CurrentOrder" })
         },
+        logout(){
+        this.$router.push({ 
+        name: "Login"}) 
+        },
     }
 }
 </script>

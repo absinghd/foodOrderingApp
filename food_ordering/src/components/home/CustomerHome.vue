@@ -100,7 +100,23 @@ export default {
         name: "CookMenu",
         params: { user: this.user, cook: cook, },
       })
-        }
+        },
+        goCustomerHome(){
+            this.$router.push({ name: "CustomerHome" })
+        },
+        goCustomerProfile(){
+            this.$router.push({ name: "CustomerProfile" })
+        },
+        goCustomerHistory(){
+            this.$router.push({ name: "CustomerHistory" })
+        },
+        goCurrentOrder(){
+            this.$router.push({ name: "CurrentOrder" })
+        },
+        logout(){
+        this.$router.push({ 
+        name: "Login"}) 
+        },
     },
     created(){
         const db = firebase.firestore();

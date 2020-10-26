@@ -180,7 +180,8 @@ export default {
                cutomerPhoto: this.user.photoURL,
                cook_uid: this.cook.uid,
                time: Date.now(),
-               menuItems: this.menuItems
+               menuItems: this.menuItems,
+               completed: false,
                
            })
            console.log('original');
