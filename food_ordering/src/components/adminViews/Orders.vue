@@ -55,46 +55,16 @@
 
     </div>
 
-                                <!-- <div class="tab">
-
-                                  <v-tabs
-                                    fixed-tabs
-                                    background-color=#ffe9ae
-                                    color=#424242
-                                  >
-                                    <v-tab>
-                                      Open Orders
-                                    </v-tab>
-
-                                    <v-tab>
-                                      Completed
-                                    </v-tab>
-                                    
-                                  </v-tabs>
-
-                                </div> -->
-
-
-      
-
-                        <!-- <div class="orders" v-for="(order,i) in orders" :key="i">
-                          <p>Name: {{order.customerName}}</p>
-                          <p>Order:</p>
-                          <p v-for="(item,i) in order.menuItems" :key="i">
-                            <a>{{item.quantity}} </a>
-                            <a>{{item.name}}</a>
-                          </p>
-                        </div> -->
-
-
 
 <div class="tabs">
 
-    <v-card>
+   
     <v-tabs
       v-model="tab"
-      background-color="primary"
-      dark
+      background-color=#ffe9ae
+      color=#424242
+      slider-color=#FE724C
+      grow
     >
       <v-tab
         v-for="item in items"
@@ -106,21 +76,34 @@
 
     </v-tabs>
 
-<v-card class="content">
-  <div v-for="(item, i) in items" :key="i">
-     <a>{{ item.tab }}</a>
-  </div>
 
-    <div class="orders" v-for="(order,i) in orders" :key="i">
+<div class="openTab" v-if="!this.tab">
+    <div class="orders" v-for="(order,e) in orders" :key="e">
+      <v-card class="openOrders" v-if="order.completed==false">
       <p>Name: {{order.customerName}}</p>
       <p>Order:</p>
-      <p v-for="(item,i) in order.menuItems" :key="i">
+      <p v-for="(item,u) in order.menuItems" :key="u">
         <a>{{item.quantity}} </a>
         <a>{{item.name}}</a>
       </p>
+      <v-btn @click="orderCompleted(order)">mark complete</v-btn>
+      </v-card>
     </div>
-</v-card>
-  </v-card>
+</div>
+
+<div class="completed" v-if="this.tab">
+    <v-card class="orders" v-for="(order,e) in orders" :key="e">
+      <div class="completedOrders" v-if="order.completed==true">
+      <p>Name: {{order.customerName}}</p>
+      <p>Order:</p>
+      <p v-for="(item,u) in order.menuItems" :key="u">
+        <a>{{item.quantity}} </a>
+        <a>{{item.name}}</a>
+      </p>
+      </div>
+    </v-card>
+</div>
+ 
 
 
 </div>
@@ -140,10 +123,10 @@ export default {
           group: null,
           user: this.$store.getters.getUser,
           orders:[],
-          tab: null,
+          tab: false,
         items: [
-          { tab: 'Open Orders', context: 'test open'},
-          { tab: 'Completed', content: 'Tab 2 Content' },],
+          { tab: 'Open Orders'},
+          { tab: 'Completed'},],
         }
     },
     computed:{
@@ -168,6 +151,9 @@ export default {
         gotoMenu(){
             this.$router.push({ 
             name: "Menu"}) 
+        },
+        orderCompleted(order){
+          console.log(order.menuItems);
         }
     },
     created(){
@@ -194,5 +180,22 @@ export default {
 }
 .tab {
   color: #424242;
+}
+.openOrders{
+  background-color: #FFC529;
+  padding: 5px;
+}
+.completedOrders{
+  background-color: #FFC529;
+  padding: 5px;
+}
+.completed{
+  padding: 10px;
+}
+.openTab{
+  padding: 10px;
+}
+.orders{
+  margin-top: 10px;
 }
 </style>

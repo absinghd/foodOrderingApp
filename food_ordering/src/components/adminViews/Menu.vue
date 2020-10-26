@@ -1,5 +1,7 @@
 <template>
   <v-app class="mainContainer">
+    
+    
     <div class="drawer">
       <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list nav dense>
@@ -41,31 +43,31 @@
     </div>
 
 
-    <div class="menu" v-for="(item, i) in menu" :key="i">
-      <p>
-        {{ item.name }}
-        <a>
-          <v-container class="px-0" fluid>
-            <v-switch
-              v-model="item.active"
-              :label="item.active"
-            ></v-switch>
-          </v-container>
-        </a>
+<a>Menu</a>
 
-      </p>
-    </div>
+<a v-for="(item,i) in menu" :key="i">
+  {{item.name}} 
+  <a v-if="item.active=='true'" class="active">is active
 
+      <v-switch
+      v-model="activeItems"
+      :label="item.name"
+      :value="item.name"
+      @click="printActive"
+    ></v-switch>
 
-    <button @click="printActive"></button>
+  </a>
+  <a v-if="item.active=='false'" class="notActive">is not active
 
-    <a>
+      <v-switch
+      v-model="activeItems"
+      :label="item.name"
+      :value="item.name"
+      @click="printActive"
+    ></v-switch>
 
-<div class="menu" v-for="(item, i) in menu" :key="i">
-      <p>{{item.name}}</p>
-      <p>{{item.active}} </p>
-</div>
-    </a>
+  </a>
+</a>
 
 
   </v-app>
@@ -81,9 +83,10 @@ export default {
       group: null,
       user: this.$store.getters.getUser,
       menu: [],
-      activeTrue: true,
-      activeFalse: false,
-    };
+      activeItems:[],
+      switch1:true,
+      switch2:false,
+    }
   },
   computed: {
     drawer: {
@@ -97,7 +100,7 @@ export default {
   },
   methods: {
     printActive(){
-      
+      console.log(this.activeItems);
     },
     logout() {
       this.$router.push({
@@ -125,9 +128,12 @@ export default {
         snapshot.forEach((doc) => {
           let item = doc.data();
           this.menu.push(item);
+          if(item.active=='true'){
+            this.activeItems.push(item.name)
+          }
         });
       });
-    console.log(this.menu);
+    console.log(this.activeItems);
   },
 };
 </script>
@@ -135,5 +141,11 @@ export default {
 <style scoped>
 .mainContainer {
   background-color: #ffe9ae;
+}
+.active{
+  color: green;
+}
+.notActive{
+  color: red;
 }
 </style>

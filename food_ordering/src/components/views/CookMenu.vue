@@ -203,7 +203,7 @@ export default {
         //console.log(this.navbarTitle);
         const db = firebase.firestore();
         //get all active menu items for cook
-        const de = db.collection("menu").where("active", "==", true);
+        const de = db.collection("menu").where("active", "==", 'true');
         de.where("cook_uid", "==", this.cook.uid)
         .get()
         .then((snapshot) => {
