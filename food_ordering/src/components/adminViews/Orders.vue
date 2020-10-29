@@ -154,6 +154,12 @@ export default {
         },
         orderCompleted(order){
           console.log(order.menuItems);
+          const db = firebase.firestore();
+        //get all the orders
+        const de = db.collection("orders").where("cook_uid", "==", this.user.uid);
+        //how to get same order?
+        de.where("menuItem.", "==", this.user.uid)
+        .get()
         }
     },
     created(){
@@ -182,7 +188,7 @@ export default {
   color: #424242;
 }
 .openOrders{
-  background-color: #FFC529;
+  background-color: rgb(255,197,41,.8);
   padding: 5px;
 }
 .completedOrders{
