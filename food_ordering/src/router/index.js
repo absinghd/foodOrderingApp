@@ -7,6 +7,8 @@ import CookMenu from '@/components/views/CookMenu'
 import ThankYou from '@/components/views/ThankYou'
 import Orders from '@/components/adminViews/Orders'
 import Menu from '@/components/adminViews/Menu'
+import NewMenuItem from '@/components/adminViews/NewMenuItem'
+
 
 Vue.use(VueRouter)
 
@@ -46,7 +48,11 @@ const routes = [
     name: 'Menu',
     component: Menu
   },
-
+  {
+    path: '/addNewMenuItem',
+    name: 'NewMenuItem',
+    component: NewMenuItem
+  }
 ]
 
 const router = new VueRouter({

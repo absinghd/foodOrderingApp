@@ -46,29 +46,32 @@
 <a>Menu</a>
 
 <a v-for="(item,i) in menu" :key="i">
-  {{item.name}} 
-  <a v-if="item.active=='true'" class="active">is active
+
+  <a v-if="item.active=='true'" class="active">
 
       <v-switch
       v-model="activeItems"
       :label="item.name"
       :value="item.name"
-      @click="printActive"
+      @click="printActive('true',i)"
     ></v-switch>
 
   </a>
-  <a v-if="item.active=='false'" class="notActive">is not active
+  <a v-if="item.active=='false'" class="notActive">
 
       <v-switch
       v-model="activeItems"
       :label="item.name"
       :value="item.name"
-      @click="printActive"
+      @click="printActive('false',i)"
     ></v-switch>
 
   </a>
 </a>
 
+<v-btn class="button" primary @click="goToAddNew">
+  Add new item
+</v-btn>
 
   </v-app>
 </template>
@@ -99,8 +102,33 @@ export default {
     },
   },
   methods: {
-    printActive(){
+    printActive(status,i){
       console.log(this.activeItems);
+      const db = firebase.firestore();
+      if(status == 'true'){
+    db.collection("menu")
+      .doc(this.menu[i].menuId)
+      .update({
+        active:'false'
+      })
+      } else{
+    db.collection("menu")
+      .doc(this.menu[i].menuId)
+      .update({
+        active:'true'
+      })
+      }
+      this.menu = [];
+          db.collection("menu")
+      .where("cook_uid", "==", this.user.uid)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          let item = doc.data();
+          this.menu.push(item);
+          
+        });
+      });
     },
     logout() {
       this.$router.push({
@@ -117,6 +145,12 @@ export default {
         name: "Menu",
       });
     },
+    goToAddNew(){
+      this.$router.push({
+      name: "NewMenuItem",
+      params: { user: this.user },
+    })
+    }
   },
   created() {
     const db = firebase.firestore();
@@ -147,5 +181,9 @@ export default {
 }
 .notActive{
   color: red;
+}
+.button{
+  margin-left: 30%;
+  margin-right: 30%;
 }
 </style>

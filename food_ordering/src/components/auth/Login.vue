@@ -31,6 +31,7 @@ export default {
         .then((result) => {
           this.token = result.credential.accessToken;
           this.user = result.user;
+          //log user data
           console.log(this.user);
           this.$store.commit("setUser");
           //save into users collections

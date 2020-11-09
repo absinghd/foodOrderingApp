@@ -86,7 +86,7 @@
         <a>{{item.quantity}} </a>
         <a>{{item.name}}</a>
       </p>
-      <v-btn @click="orderCompleted(order)">mark complete</v-btn>
+      <v-btn @click="orderCompleted(order,e)">mark complete</v-btn>
       </v-card>
     </div>
 </div>
@@ -152,14 +152,16 @@ export default {
             this.$router.push({ 
             name: "Menu"}) 
         },
-        orderCompleted(order){
-          console.log(order.menuItems);
+        orderCompleted(order,e){
+          //console.log(order.orderId);
           const db = firebase.firestore();
-        //get all the orders
-        const de = db.collection("orders").where("cook_uid", "==", this.user.uid);
-        //how to get same order?
-        de.where("menuItem.", "==", this.user.uid)
-        .get()
+        //update the document status
+        const de = db.collection("orders").doc(order.orderId);
+       de.update({
+          completed: true
+        })
+  //  //update this.orders
+        this.orders[e].completed = true;
         }
     },
     created(){
@@ -172,7 +174,7 @@ export default {
             let order = doc.data();
             this.orders.push(order)
           })})
-        console.log(this.orders);
+        //console.log(this.orders);
         //this.user = this.$store.getters.getUser;
         //this.$store.commit("setCooks", this.cooks);
     }

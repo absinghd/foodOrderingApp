@@ -168,11 +168,13 @@ export default {
           //console.log(this.menuItems);
         },
         placeOrder(){
-          console.log('order');
-            console.log(this.menuItems);
+          //console.log('order');
+            //console.log(this.menuItems);
            const db = firebase.firestore();
-           db.collection('orders')
-           .add({
+           const orderdRef = db.collection('orders').doc();
+           const orderId = orderdRef.id;
+           orderdRef
+           .set({
                customerName: this.user.displayName,
                customer_uid: this.user.uid,
                customerEmail: this.user.email,
@@ -182,6 +184,7 @@ export default {
                time: Date.now(),
                menuItems: this.menuItems,
                completed: false,
+               orderId: orderId
                
            })
            console.log('original');
