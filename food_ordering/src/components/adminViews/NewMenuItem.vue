@@ -55,55 +55,43 @@
     </div>
 
 
-    <v-form>
+
+<v-form class="form">
+    <v-text-field
+    v-model="name"
+    label=" Name"
+    >  
+    </v-text-field>
+
+    <v-text-field
+    v-model="price"
+    label="Price"
+    prefix="$"
+    >  
+    </v-text-field>
+    
+
+    <v-text-field class="ingList"
+    @keydown.tab.prevent="addIng"
+    v-model="another"
+    label="Ingredients"
+    >
+    </v-text-field>
+ 
+<v-btn @click="addIng">Add</v-btn>
+<v-icon>mdi-plus</v-icon> 
+
+    <p>List of Ingredients:</p>
+<div.ingList>
+    <a v-for="(ing, i) in ingredients" :key="i">
+        {{ing}} <br>
+    </a>
+</div.ingList>
 
 
-            <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            :counter="10"
-            label="Name"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="price"
-            :rules="priceRules"
-            :counter="10"
-            label="Price"
-            required
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-text-field
-            v-model="ingredients"
-            :rules="ingredientRules"
-            label="Ingredients"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-container>
 
 
-    </v-form>
-
-
+</v-form>
 
 
     </v-app>
@@ -111,24 +99,19 @@
 
 
 <script>
+
 export default {
     name: 'NewMenuItem',
     data(){
-        return{
-         group: null,
-         user: this.$store.getters.getUser,
-         valid: false,
-         firstname: '',
-         lastname: '',
-         nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters',
-      ],
-         email: '',
-         emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
-      ],
+      return{
+        group: null,
+        user: this.$store.getters.getUser,
+        name: null,
+        another: null,
+        ingredients: [],
+        price: null,
+        feedback: null,
+        listOfIng: null,
         }
     },
     methods:{
@@ -144,6 +127,17 @@ export default {
             this.$router.push({ 
             name: "Menu"}) 
         },
+        addIng(){
+          if(this.another){
+            this.ingredients.push(this.another)
+            this.another = null
+            this.feedback = null
+            this.listOfIng= "List of Ingredients:"
+            }else{
+            this.feedback = "You must enter a value to add an ingredient"
+            }
+              
+      },
     },
     computed: {
     drawer: {
@@ -161,5 +155,11 @@ export default {
 <style scoped>
 .mainContainer {
   background-color: #ffe9ae;
+}
+.form{
+    padding: 10px;
+}
+.ingList{
+    margin-right: 35%;
 }
 </style>
