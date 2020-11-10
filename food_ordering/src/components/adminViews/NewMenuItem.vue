@@ -76,29 +76,38 @@
     v-model="another"
     label="Ingredients"
     >
-    </v-text-field>
- 
-<v-btn @click="addIng">Add</v-btn>
-<v-icon>mdi-plus</v-icon> 
 
-    <p>List of Ingredients:</p>
-<div.ingList>
-    <a v-for="(ing, i) in ingredients" :key="i">
+    </v-text-field>
+
+<v-icon class="plusIcon" @click="addIng">mdi-plus</v-icon> 
+
+<div class="ingsList">
+    <a class="listTitle">List of Ingredients:</a><br>
+    <a class="list" v-for="(ing, i) in ingredients" :key="i">
         {{ing}} <br>
     </a>
-</div.ingList>
+</div>
 
 
 
+
+<v-btn class="submit" @click="addMenuItem">Add</v-btn>
 
 </v-form>
 
+<div class="image">
+
+<test></test>
+
+</div>
 
     </v-app>
 </template>
 
 
 <script>
+import test from "@/views/test";
+
 
 export default {
     name: 'NewMenuItem',
@@ -114,6 +123,9 @@ export default {
         listOfIng: null,
         }
     },
+    components: {
+    test
+  },
     methods:{
         logout(){
             this.$router.push({ 
@@ -161,5 +173,23 @@ export default {
 }
 .ingList{
     margin-right: 35%;
+}
+.submit{
+    margin-top: 20px;
+    margin-left: 42%;
+    margin-right:42%;
+}
+.plusIcon{
+    margin-top: -80px;
+    margin-left: 68%
+}
+.ingsList{
+    margin-top: -40px;
+}
+.listTitle{
+    color: black;
+}
+.list{
+    color: #424242;
 }
 </style>
