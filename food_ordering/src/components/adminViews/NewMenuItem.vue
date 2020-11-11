@@ -88,25 +88,23 @@
     </a>
 </div>
 
+<div class="image">
 
+
+
+</div>
 
 
 <v-btn class="submit" @click="addMenuItem">Add</v-btn>
 
 </v-form>
 
-<div class="image">
-
-<test></test>
-
-</div>
 
     </v-app>
 </template>
 
 
 <script>
-import test from "@/views/test";
 
 
 export default {
@@ -124,7 +122,6 @@ export default {
         }
     },
     components: {
-    test
   },
     methods:{
         logout(){
@@ -147,9 +144,11 @@ export default {
             this.listOfIng= "List of Ingredients:"
             }else{
             this.feedback = "You must enter a value to add an ingredient"
-            }
-              
+            }   
       },
+      addMenuItem(){
+          console.log('method to add to database');
+      }
     },
     computed: {
     drawer: {

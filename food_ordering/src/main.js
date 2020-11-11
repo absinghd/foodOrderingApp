@@ -8,6 +8,7 @@ import firebase from 'firebase'
 import 'firebase/firestore'
 
 
+
 Vue.config.productionTip = false
 
 new Vue({
