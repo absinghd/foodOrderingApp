@@ -1,10 +1,16 @@
 <template>
+    <v-app class="mainContainer">
+        <p class="title">History</p>
 
-  <v-app class="mainContainer">
-    
-    <p class="title">
-      Choose a Cook
-    </p>
+        <a class="orders" v-for="(order, i) in pastOrders" :key="i">
+            <div class="orderItems">
+            <a>{{order.time}}</a>
+            <br>
+            <a v-for="(item,x) in order.menuItems" :key="x">
+                <a v-if="item.quantity > 0">{{item.quantity}} {{item.name}}, </a>
+            </a>
+            </div>
+        </a>
 
 
     <v-navigation-drawer
@@ -59,35 +65,26 @@
       </v-list>
     </v-navigation-drawer>
 
-<div class="button">
-<div class="cooks" v-for="(cook, i) in cooks" :key="i" @click="cookMenu(cook)">
-    <v-btn elevation="2"
-  large block color="#FFC529"> {{cook.name}}</v-btn>
-  </div>
-  </div>
-
-  </v-app>
-
+    
+    </v-app>
 </template>
 
 <script>
 import firebase from 'firebase'
 
 export default {
-    name: 'CustomerHome',
+    name: 'History',
     data(){
         return{
             user: this.$store.getters.getUser,
-            group:null,
-            cooks:[]
-           
+            navbarTitle: this.$store.getters.getNavbarTitle,
+            cook: this.$route.params.cook,
+            group: null,
+            pastOrders:[],
 
         }
     },
     computed:{
-        // drawer(){
-        //     return this.$store.getters.getDrawer;
-
         drawer: {
            get(){
              return this.$store.getters.getDrawer;
@@ -95,15 +92,9 @@ export default {
            set(){
              return null
            } 
-        }
-    },
-    methods:{
-        cookMenu(cook){
-      this.$router.push({
-        name: "CookMenu",
-        params: { user: this.user, cook: cook, },
-      })
         },
+    },
+    methods: {
         goCustomerHome(){
             this.$router.push({ name: "CustomerHome" })
         },
@@ -117,31 +108,27 @@ export default {
             this.$router.push({ name: "CurrentOrder" })
         },
         logout() {
-          firebase
+        firebase
             .auth()
             .signOut()
             .then(function() {
             });
             this.$router.push({ name: "Login" });
-        },
+        },  
     },
     created(){
         const db = firebase.firestore();
-        //get all the cooks
-        db.collection("admin")     
+        //get all the orders
+        db.collection("orders").where("customer_uid", "==", this.user.uid)
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            let cook = doc.data();
-            this.cooks.push(cook)
+            let order = doc.data();
+            this.pastOrders.push(order)
           })})
-        //console.log(this.cooks);
-        this.user = this.$store.getters.getUser;
-        this.$store.commit("setCooks", this.cooks);
-    }
-    
-}
 
+    }
+}
 </script>
 
 <style scoped>
@@ -149,15 +136,13 @@ export default {
     background-color: #FFE9AE;
     padding: 10px;
 }
-.button{
-    padding: 15px;
-    text-align: center;
-    margin-top: 10px;
-}
-.cooks{
-    margin-top: 15px;
-}
 .title{
     text-align: center;
+}
+.orders{
+    margin-top: 5px;
+}
+.orderItems{
+    margin-top: 5px;
 }
 </style>

@@ -8,6 +8,9 @@ import ThankYou from '@/components/views/ThankYou'
 import Orders from '@/components/adminViews/Orders'
 import Menu from '@/components/adminViews/Menu'
 import NewMenuItem from '@/components/adminViews/NewMenuItem'
+import CurrentOrder from '@/components/views/CurrentOrder'
+import History from '@/components/views/History'
+import CustomerProfile from '@/components/views/CustomerProfile'
 
 
 Vue.use(VueRouter)
@@ -52,7 +55,22 @@ const routes = [
     path: '/addNewMenuItem',
     name: 'NewMenuItem',
     component: NewMenuItem
-  }
+  },
+  {
+    path: '/curretOrder',
+    name: 'CurrentOrder',
+    component: CurrentOrder
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: History
+  },
+  {
+    path: '/customerProfile',
+    name: 'CustomerProfile',
+    component: CustomerProfile
+  },
 ]
 
 const router = new VueRouter({

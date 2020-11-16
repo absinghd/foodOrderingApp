@@ -6,12 +6,13 @@
 <div class="menuItems" v-for="(item, i) in menuItems" :key="i">
     <v-card elevation='2'>
         <v-card-title>{{item.name}}</v-card-title>
-        <v-img src="https://www.handletheheat.com/wp-content/uploads/2015/03/Best-Birthday-Cake-with-milk-chocolate-buttercream-SQUARE.jpg" max-height="150" max-width='100'></v-img>
+        <v-img class="image" src="https://www.handletheheat.com/wp-content/uploads/2015/03/Best-Birthday-Cake-with-milk-chocolate-buttercream-SQUARE.jpg" max-height="150" max-width='100'></v-img>
        
        <div class="ingredients">
         <a>Ingredients: </a>
         <a class="ingredient" v-for="(ingredient,i) in item.ingredients" :key="i"> {{ingredient}} | </a>
         </div>
+
 
         <div class="price">
         <a>Price: </a><a class="ingredient">{{item.price}}</a>
@@ -47,10 +48,6 @@ Place Order
 </div>
 
 </div>
-
-        <div>
-            <p>{{this.cook}} </p> 
-        </div>
 
 
           <v-navigation-drawer
@@ -150,7 +147,7 @@ export default {
             this.$router.push({ name: "CustomerProfile" })
         },
         goCustomerHistory(){
-            this.$router.push({ name: "CustomerHistory" })
+            this.$router.push({ name: "History" })
         },
         goCurrentOrder(){
             this.$router.push({ name: "CurrentOrder" })
@@ -187,6 +184,7 @@ export default {
                orderId: orderId
                
            })
+           this.$store.commit("setCurrentOrder", this.menuItems)
            console.log('original');
             console.log(this.originalMenu);
             console.log(this.user.display);
@@ -258,11 +256,17 @@ export default {
 }
 .placeOrder{
     padding: 10px;
+    margin-top: 5px;
 }
 .submit{
     text-align: center; 
 }
 .total{
     text-align: left;
+}
+.image{
+  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 </style>

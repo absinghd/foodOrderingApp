@@ -1,9 +1,26 @@
 <template>
     <v-app class="mainContainer">
 
-            <div class="drawer">
 
-        <v-navigation-drawer
+<v-col class="content" align-self="center">
+<v-img
+class="image"
+contain
+position="center"
+  lazy-src="https://picsum.photos/id/11/10/6"
+  max-height="150"
+  max-width="250"
+ :src="userPhotoURL"
+></v-img>
+</v-col>
+
+
+<div class="userInfo">
+ <p>{{this.user.displayName}}</p>
+ <p>{{this.user.email}}</p>
+</div>
+
+    <v-navigation-drawer
       v-model="drawer"
       absolute
       temporary
@@ -16,29 +33,33 @@
           v-model="group"
           active-class="deep-orange--text text--accent-3"
         >
-          <v-list-item @click="gotoOrders">
+          <v-list-item @click="goCustomerHome">
             <v-list-item-icon>
-              <v-icon>mdi-cart-outline</v-icon>
+              <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Orders</v-list-item-title>
+            <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="gotoMenu">
+          <v-list-item @click="goCustomerProfile">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Menu</v-list-item-title>
+            <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
 
-            <!-- <v-list-item @click="goCustomerHistory"> -->
-            <v-list-item>
+            <v-list-item @click="goCustomerHistory">
             <v-list-item-icon>
               <v-icon>mdi-history</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Past Orders</v-list-item-title>
+            <v-list-item-title>History</v-list-item-title>
           </v-list-item>
 
-
+            <v-list-item @click="goCurrentOrder">
+            <v-list-item-icon>
+              <v-icon>mdi-cart-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Current Order</v-list-item-title>
+          </v-list-item>
 
             <v-list-item @click="logout">
             <v-list-item-icon>
@@ -52,18 +73,6 @@
     </v-navigation-drawer>
 
 
-    </div>
-
-
-        
-
-        <a>Thanks placing your order {{this.user.displayName}}!</a>
-        <p>Here is what you ordered from {{this.cook.name}}: <a>
-            <p v-for="(item, i) in menuItems" :key="i">
-            {{item.quantity}} of {{item.name}}
-            </p>
-            </a></p>
-
     </v-app>
 </template>
 
@@ -71,13 +80,14 @@
 import firebase from 'firebase'
 
 export default {
-    name: 'ThankYou',
+    name: 'CustomerProfile',
     data(){
         return{
-            user: this.$route.params.user,
-            cook:this.$route.params.cook,
-            menuItems: this.$route.params.menuItems,
+            user: this.$store.getters.getUser,
+            navbarTitle: this.$store.getters.getNavbarTitle,
+            cook: this.$route.params.cook,
             group: null,
+            userPhotoURL:null
 
         }
     },
@@ -94,7 +104,7 @@ export default {
            } 
         },
     },
-    methods:{
+    methods: {
         goCustomerHome(){
             this.$router.push({ name: "CustomerHome" })
         },
@@ -107,14 +117,18 @@ export default {
         goCurrentOrder(){
             this.$router.push({ name: "CurrentOrder" })
         },
-    logout() {
-      firebase
-        .auth()
-        .signOut()
-        .then(function() {
-        });
-        this.$router.push({ name: "Login" });
+        logout() {
+        firebase
+            .auth()
+            .signOut()
+            .then(function() {
+            });
+            this.$router.push({ name: "Login" });
+        },  
     },
+    created(){
+        console.log(this.user);
+        this.userPhotoURL = this.user.photoURL
     }
 }
 </script>
@@ -122,5 +136,17 @@ export default {
 <style scoped>
 .mainContainer{
     background-color: #FFE9AE;
+    padding: 10px;
+}
+.image{
+    margin-top: 10px;
+}
+.userInfo{
+    text-align: center;
+    margin-top: 50px;
+}
+.content{
+    display: flex;
+    justify-content: center;
 }
 </style>
