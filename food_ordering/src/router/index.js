@@ -11,6 +11,7 @@ import NewMenuItem from '@/components/adminViews/NewMenuItem'
 import CurrentOrder from '@/components/views/CurrentOrder'
 import History from '@/components/views/History'
 import CustomerProfile from '@/components/views/CustomerProfile'
+import PastOrders from '@/components/adminViews/PastOrders'
 
 
 Vue.use(VueRouter)
@@ -70,6 +71,11 @@ const routes = [
     path: '/customerProfile',
     name: 'CustomerProfile',
     component: CustomerProfile
+  },
+  {
+    path: '/pastOrders',
+    name: 'PastOrders',
+    component: PastOrders
   },
 ]
 

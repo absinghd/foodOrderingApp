@@ -2,7 +2,7 @@
     <v-app class="mainContainer">
 
 
-<v-col class="content" align-self="center">
+<div class="content">
 <v-img
 class="image"
 contain
@@ -12,7 +12,7 @@ position="center"
   max-width="250"
  :src="userPhotoURL"
 ></v-img>
-</v-col>
+</div>
 
 
 <div class="userInfo">

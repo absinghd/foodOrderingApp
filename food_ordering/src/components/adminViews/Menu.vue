@@ -24,7 +24,7 @@
             </v-list-item>
 
             <!-- <v-list-item @click="goCustomerHistory"> -->
-            <v-list-item>
+            <v-list-item @click="gotoPastOrders">
               <v-list-item-icon>
                 <v-icon>mdi-history</v-icon>
               </v-list-item-icon>
@@ -147,6 +147,10 @@ export default {
       this.$router.push({
         name: "Menu",
       });
+    },
+    gotoPastOrders(){
+        this.$router.push({ 
+        name: "PastOrders"}) 
     },
     goToAddNew(){
       this.$router.push({

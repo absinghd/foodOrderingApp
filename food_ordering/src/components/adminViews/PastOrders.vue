@@ -56,61 +56,35 @@
     </div>
 
 
-<div class="tabs">
-
-   
-    <v-tabs
-      v-model="tab"
-      background-color=#ffe9ae
-      color=#424242
-      slider-color=#FE724C
-      grow
-    >
-      <v-tab
-        v-for="item in items"
-        :key="item.tab"
-      >
-        {{ item.tab }}
-      </v-tab>
 
 
-    </v-tabs>
 
 
-<div class="openTab" v-if="!this.tab">
-    <div class="orders" v-for="(order,e) in orders" :key="e">
-      <v-card class="openOrders" v-if="order.completed==false">
-      <p>Name: {{order.customerName}}</p>
-      <p>Order:</p>
-      <p v-for="(item,u) in order.menuItems" :key="u">
-        <a v-if="item.quantity > 0">
-        <a>{{item.quantity}} </a>
-        <a>{{item.name}}</a>
-        </a>
-      </p>
-      <v-btn @click="orderCompleted(order,e)">mark complete</v-btn>
-      </v-card>
-    </div>
-</div>
-
-<div class="completed" v-if="this.tab">
+<div class="completed">
     <v-card class="orders" v-for="(order,e) in orders" :key="e">
-      <div class="completedOrders" v-if="order.completed==true">
+      
+      <div class="completedOrders">
+          <a>{{order.time}}</a>
+      
       <p>Name: {{order.customerName}}</p>
-      <p>Order:</p>
+      <p>Order: 
+      </p>
+      
       <p v-for="(item,u) in order.menuItems" :key="u">
         <a v-if="item.quantity > 0">
         <a>{{item.quantity}} </a>
         <a>{{item.name}}</a>
         </a>
       </p>
+      
       </div>
+      
     </v-card>
 </div>
  
 
 
-</div>
+
 
 
     </v-app>
@@ -127,10 +101,7 @@ export default {
           group: null,
           user: this.$store.getters.getUser,
           orders:[],
-          tab: false,
-        items: [
-          { tab: 'Open Orders'},
-          { tab: 'Completed'},],
+
         }
     },
     computed:{
@@ -155,10 +126,6 @@ export default {
         gotoMenu(){
             this.$router.push({ 
             name: "Menu"}) 
-        },
-        gotoPastOrder(){
-            this.$router.push({ 
-            name: "PastOrders"}) 
         },
         orderCompleted(order,e){
           //console.log(order.orderId);
