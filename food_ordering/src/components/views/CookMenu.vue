@@ -195,10 +195,14 @@ export default {
         params: { user: this.user, cook: this.cook, menuItems: this.menuItems},
       })
         },
-        logout(){
-        this.$router.push({ 
-    name: "Login"}) 
-        },
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+        });
+        this.$router.push({ name: "Login" });
+    },
     },
     created(){
         this.$store.commit("setNavbarTitle", this.cook);

@@ -6,6 +6,7 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import firebase from 'firebase'
 import 'firebase/firestore'
+// import './cloudinary.js'
 
 
 

@@ -113,10 +113,14 @@ export default {
         goCurrentOrder(){
             this.$router.push({ name: "CurrentOrder" })
         },
-        logout(){
-        this.$router.push({ 
-        name: "Login"}) 
-        },
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+        });
+        this.$router.push({ name: "Login" });
+    },
     },
     created(){
         const db = firebase.firestore();

@@ -131,9 +131,12 @@ export default {
       });
     },
     logout() {
-      this.$router.push({
-        name: "Login",
-      });
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+        });
+        this.$router.push({ name: "Login" });
     },
     gotoOrders() {
       this.$router.push({

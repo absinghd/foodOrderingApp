@@ -68,6 +68,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
     name: 'ThankYou',
     data(){
@@ -105,10 +107,14 @@ export default {
         goCurrentOrder(){
             this.$router.push({ name: "CurrentOrder" })
         },
-        logout(){
-        this.$router.push({ 
-        name: "Login"}) 
-        },
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+        });
+        this.$router.push({ name: "Login" });
+    },
     }
 }
 </script>

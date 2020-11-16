@@ -105,7 +105,7 @@
 
 
 <script>
-
+import firebase from 'firebase'
 
 export default {
     name: 'NewMenuItem',
@@ -124,10 +124,14 @@ export default {
     components: {
   },
     methods:{
-        logout(){
-            this.$router.push({ 
-            name: "Login"}) 
-        },
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+        });
+        this.$router.push({ name: "Login" });
+    },
         gotoOrders(){
             this.$router.push({ 
             name: "Orders"}) 
