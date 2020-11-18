@@ -174,7 +174,7 @@ export default {
           }
         });
       });
-    console.log(this.activeItems);
+    //console.log(this.activeItems);
   },
 };
 </script>

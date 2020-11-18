@@ -90,7 +90,7 @@
 
 <div class="image">
 
-
+<UploadPic></UploadPic>
 
 </div>
 
@@ -106,6 +106,7 @@
 
 <script>
 import firebase from 'firebase'
+import UploadPic from './UploadPic'
 
 export default {
     name: 'NewMenuItem',
@@ -118,13 +119,16 @@ export default {
         ingredients: [],
         price: null,
         feedback: null,
+        imageUrl: this.$store.getters.getUploadImageUrl,
         listOfIng: null,
         }
     },
     components: {
+        UploadPic
   },
     methods:{
-    logout() {
+
+        logout() {
       firebase
         .auth()
         .signOut()
@@ -155,8 +159,31 @@ export default {
             }   
       },
       addMenuItem(){
-          console.log('method to add to database');
-      }
+          const db = firebase.firestore();
+          db.collection('menu').add({
+                  name: this.name,
+                  active: "true",
+                  cook_uid: this.user.uid,
+                  ingredients:this.ingredients,
+                  price: this.price,
+                  menu_id:null,
+                  quantity: 0,
+                  imageUrl: this.imageUrl
+              })
+              .then(function(docRef) {
+                //console.log("Document written with ID: ", docRef.id)
+                db.collection('menu').doc(docRef.id).update({
+                    menu_id: docRef.id,
+                })
+                
+                })
+              .then(() => {
+              this.$router.push({
+        name: "Menu",
+        // params: { exercise:this.title, time: this.time },
+      })
+      })
+    },
     },
     computed: {
     drawer: {
@@ -198,5 +225,10 @@ export default {
 }
 .list{
     color: #424242;
+}
+.image{
+    padding: 0px;
+    margin-top: 25px;
+    text-align: left;
 }
 </style>

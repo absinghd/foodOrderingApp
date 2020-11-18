@@ -6,7 +6,7 @@
 <div class="menuItems" v-for="(item, i) in menuItems" :key="i">
     <v-card elevation='2'>
         <v-card-title>{{item.name}}</v-card-title>
-        <v-img class="image" src="https://www.handletheheat.com/wp-content/uploads/2015/03/Best-Birthday-Cake-with-milk-chocolate-buttercream-SQUARE.jpg" max-height="150" max-width='100'></v-img>
+        <v-img class="image" :src="item.imageUrl" max-height="150" max-width='100'></v-img>
        
        <div class="ingredients">
         <a>Ingredients: </a>
@@ -123,7 +123,7 @@ export default {
             originalMenu: [],
             user: this.$store.getters.getUser,
             quantity:0,
-            
+            itemImage: "https://embed.widencdn.net/img/mccormick/c45v26nn3c/1365x1365px/Fish_Tacos_243.jpg?crop=true&anchor=342,0&q=80&r=90&color=ffffffff&u=o2hyef"
         }
     },
     computed:{

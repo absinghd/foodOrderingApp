@@ -3,7 +3,7 @@
 
             <div class="drawer">
 
-        <v-navigation-drawer
+    <v-navigation-drawer
       v-model="drawer"
       absolute
       temporary
@@ -16,29 +16,33 @@
           v-model="group"
           active-class="deep-orange--text text--accent-3"
         >
-          <v-list-item @click="gotoOrders">
+          <v-list-item @click="goCustomerHome">
             <v-list-item-icon>
-              <v-icon>mdi-cart-outline</v-icon>
+              <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Orders</v-list-item-title>
+            <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="gotoMenu">
+          <v-list-item @click="goCustomerProfile">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Menu</v-list-item-title>
+            <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
 
-            <!-- <v-list-item @click="goCustomerHistory"> -->
-            <v-list-item>
+            <v-list-item @click="goCustomerHistory">
             <v-list-item-icon>
               <v-icon>mdi-history</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Past Orders</v-list-item-title>
+            <v-list-item-title>History</v-list-item-title>
           </v-list-item>
 
-
+            <v-list-item @click="goCurrentOrder">
+            <v-list-item-icon>
+              <v-icon>mdi-cart-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Current Order</v-list-item-title>
+          </v-list-item>
 
             <v-list-item @click="logout">
             <v-list-item-icon>

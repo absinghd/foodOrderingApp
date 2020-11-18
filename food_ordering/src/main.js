@@ -6,10 +6,12 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import firebase from 'firebase'
 import 'firebase/firestore'
+
 // import './cloudinary.js'
+import axios from "axios";
 
 
-
+Vue.use(axios)
 Vue.config.productionTip = false
 
 new Vue({

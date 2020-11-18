@@ -1,13 +1,14 @@
 <template>
-    <div class="test">
-        <v-btn class="test">
-            testing this
+    <div class="button">
+        <v-btn class="upload">
+            Upload Image
         </v-btn>
     </div>
 </template>
 
 <script>
+
 export default {
-    name: 'test'
+    name: 'UploadPics'
 }
 </script>
