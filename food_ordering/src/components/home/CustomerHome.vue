@@ -3,7 +3,7 @@
   <v-app class="mainContainer">
     
     <p class="title">
-      Choose a Cook
+      Choose a Chef
     </p>
 
 
@@ -62,7 +62,7 @@
 <div class="button">
 <div class="cooks" v-for="(cook, i) in cooks" :key="i" @click="cookMenu(cook)">
     <v-btn elevation="2"
-  large block color="#FFC529"> {{cook.name}}</v-btn>
+  large block color="#b9e8cf"> {{cook.name}}</v-btn>
   </div>
   </div>
 
@@ -146,7 +146,7 @@ export default {
 
 <style scoped>
 .mainContainer{
-    background-color: #FFE9AE;
+    background-color: #74cae0;
     padding: 10px;
 }
 .button{

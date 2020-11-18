@@ -1,6 +1,6 @@
 <template>
     <v-app class="mainContainer">
-        <p class="title">Current orders</p>
+        <p class="title">Current Orders</p>
         <a class="orders" v-for="(order, i) in openOrders" :key="i">
             <div class="orderItems">
         {{order.time}}
@@ -124,7 +124,8 @@ export default {
         //get all the orders
         // const de = db.collection("orders").where("completed", "==", false);
         // de.collection("orders").where("customer_uid", "==", this.user.uid)
-        db.collection("orders").where("completed", "==", false)
+        const de = db.collection("orders").where("completed", "==", false);
+        de.where("customer_uid", "==", this.user.uid)
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {

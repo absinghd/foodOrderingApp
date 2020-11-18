@@ -88,7 +88,10 @@
         <a>{{item.name}}</a>
         </a>
       </p>
-      <v-btn @click="orderCompleted(order,e)">mark complete</v-btn>
+      
+      <v-btn @click="orderCompleted(order,e)">mark complete</v-btn>&nbsp;&nbsp;
+
+      <a class="email">{{order.customerEmail}}</a>
       </v-card>
     </div>
 </div>
@@ -101,9 +104,10 @@
       <p v-for="(item,u) in order.menuItems" :key="u">
         <a v-if="item.quantity > 0">
         <a>{{item.quantity}} </a>
-        <a>{{item.name}}</a>
+        <a>{{item.name}}</a> 
         </a>
       </p>
+      <a>{{order.customerEmail}}</a>
       </div>
     </v-card>
 </div>
@@ -214,5 +218,9 @@ export default {
 }
 .orders{
   margin-top: 10px;
+}
+.email{
+  text-align: right;
+  margin-left: 8px;
 }
 </style>

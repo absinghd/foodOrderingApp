@@ -61,10 +61,15 @@
 
         
 
-        <a>Thanks placing your order {{this.user.displayName}}!</a>
+        <a>Thanks for placing your order {{this.user.displayName}}!</a>
         <p>Here is what you ordered from {{this.cook.name}}: <a>
             <p v-for="(item, i) in menuItems" :key="i">
-            {{item.quantity}} of {{item.name}}
+              <a v-if="item.quantity == 1">
+            {{item.quantity}} order of {{item.name}}
+            </a>
+              <a v-if="item.quantity > 1">
+            {{item.quantity}} orders of {{item.name}}s
+            </a>
             </p>
             </a></p>
 

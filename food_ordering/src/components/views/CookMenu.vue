@@ -20,7 +20,7 @@
 
         <div class="counter">
            <v-btn
-            color="#FFC529"
+            color="#b9e8cf"
             elevation="2"
             rounded
             >
@@ -38,7 +38,7 @@
     <a class="submit"><v-btn
     @click="placeOrder"
   elevation="2"
-  color="#FFC529"
+  color="#b9e8cf"
 
 >
 Place Order
@@ -153,16 +153,18 @@ export default {
             this.$router.push({ name: "CurrentOrder" })
         },
         minusItemQuantity(item, quantity, i){
+           if(quantity > 0){
           quantity--;
           this.menuItems[i].quantity = quantity
           console.log('order '+quantity +" "+ item);          
           //console.log(this.menuItems);
+           }
         },
         plusItemQuantity(item, quantity, i){
           quantity++;
           this.menuItems[i].quantity = quantity
           console.log('order '+quantity +" "+ item);
-          //console.log(this.menuItems);
+          //console.log(this.menuItems);        
         },
         placeOrder(){
           //console.log('order');
@@ -224,7 +226,7 @@ export default {
 
 <style scoped>
 .mainContainer{
-    background-color: #FFE9AE;
+    background-color: #74cae0;
 }
 .cards{
     padding: 15px;

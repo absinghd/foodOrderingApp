@@ -5,7 +5,7 @@
     class="mx-auto overflow-hidden"
   >
     <v-app-bar
-      color="#FE724C"
+      color="#d7a4a4"
       dark
     >
       <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>
@@ -24,7 +24,7 @@
     class="mx-auto overflow-hidden"
   >
     <v-app-bar
-      color="#FE724C"
+      color="#d7a4a4"
       dark
     >
       <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>

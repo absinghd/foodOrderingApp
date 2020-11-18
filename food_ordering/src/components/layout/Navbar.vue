@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn block color='#FE724C' large class="theme--dark">navbar</v-btn>
+        <v-btn block color='#d7a4a4' large class="theme--dark">navbar</v-btn>
     </div>
 </template>
 

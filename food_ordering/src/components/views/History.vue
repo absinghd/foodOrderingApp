@@ -1,6 +1,6 @@
 <template>
     <v-app class="mainContainer">
-        <p class="title">History</p>
+        <p class="title">My Order History</p>
 
         <a class="orders" v-for="(order, i) in pastOrders" :key="i">
             <div class="orderItems">

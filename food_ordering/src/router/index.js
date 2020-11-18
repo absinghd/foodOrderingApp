@@ -18,12 +18,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'CustomerHome',
     component: CustomerHome
   },
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
     component: Login
   },
@@ -84,5 +84,9 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+
+
+
 
 export default router
