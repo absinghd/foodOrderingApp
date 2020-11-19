@@ -136,6 +136,8 @@ export default {
         .signOut()
         .then(function() {
         });
+        this.$store.commit("setAdminFalse")
+        this.$store.commit("setUserLogout")
         this.$router.push({ name: "Login" });
     },
     gotoOrders() {

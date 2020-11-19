@@ -110,6 +110,7 @@ Place Order
 
 <script>
 import firebase from 'firebase'
+//import { format } from "date-fns";
 
 export default {
     name: 'CookMenu',
@@ -180,10 +181,11 @@ export default {
                customerPhoneNumber: this.user.phoneNumber,
                cutomerPhoto: this.user.photoURL,
                cook_uid: this.cook.uid,
-               time: Date.now(),
+               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                menuItems: this.menuItems,
                completed: false,
-               orderId: orderId
+               orderId: orderId,
+               cookName: this.cook.name
                
            })
            this.$store.commit("setCurrentOrder", this.menuItems)
@@ -201,11 +203,12 @@ export default {
         .signOut()
         .then(function() {
         });
+        this.$store.commit("setAdminFalse")
         this.$router.push({ name: "Login" });
     },
     },
     created(){
-        this.$store.commit("setNavbarTitle", this.cook);
+        this.$store.commit("setNavbarTitle", this.cook.name);
         this.navbarTitle = this.$store.getters.getNavbarTitle;
         //console.log(this.navbarTitle);
         const db = firebase.firestore();

@@ -3,12 +3,13 @@
         <p class="title">Current Orders</p>
         <a class="orders" v-for="(order, i) in openOrders" :key="i">
             <div class="orderItems">
-        {{order.time}}
-        <br>
+        <a class="timestamp">{{timestamps[i]}}</a> <br>
             <a v-for="(item,x) in order.menuItems" :key="x">
-                <a v-if="item.quantity > 0">{{item.quantity}} {{item.name}}, </a>
+                <a class="orderItem" v-if="item.quantity > 0 && item.quantity == 1">{{item.quantity}} {{item.name}}, </a>
+                <a class="orderItem" v-if="item.quantity > 1">{{item.quantity}} {{item.name}}s, </a>
             </a>
 </div>
+<br>
         </a>
 
 
@@ -70,6 +71,7 @@
 
 <script>
 import firebase from 'firebase'
+import { format } from "date-fns";
 
 export default {
     name: 'CurrentOrder',
@@ -80,7 +82,8 @@ export default {
             cook: this.$route.params.cook,
             group: null,
             currentOrder: this.$store.getters.getCurrentOrder,
-            openOrders:[]
+            openOrders:[],
+            timestamps:[]
 
         }
     },
@@ -116,6 +119,7 @@ export default {
             .signOut()
             .then(function() {
             });
+            this.$store.commit("setAdminFalse")
             this.$router.push({ name: "Login" });
         },  
     },
@@ -131,6 +135,8 @@ export default {
           snapshot.forEach((doc) => {
             let order = doc.data();
             this.openOrders.push(order)
+            let timeS = order.timestamp.toDate();
+            this.timestamps.push(format(timeS,"PPp	"))
           })})
 
     }
@@ -139,7 +145,7 @@ export default {
 
 <style scoped>
 .mainContainer{
-    background-color: #FFE9AE;
+    background-color: #74cae0;
     padding: 10px;
 }
 .title{
@@ -150,5 +156,12 @@ export default {
 }
 .orders{
     margin-top: 5px;
+}
+.timestamp{
+ 
+  color: #424242;
+}
+.orderItem{
+  color: #098196;
 }
 </style>

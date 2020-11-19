@@ -1,10 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Firebase from 'firebase'
+import createPersistedState from "vuex-persistedstate";
+//import account from './modules/account'
 
 Vue.use(Vuex)
 
+
+
 export default new Vuex.Store({
+ plugins: [createPersistedState()],
+  // modules: {
+  //   account,
+  // },
   state: {
     user: null,
     admin: false,
@@ -25,6 +33,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUser: state => { state.user = Firebase.auth().currentUser},
+    setUserLogout: state => {state.user = null},
     setAdminTrue: state => {state.admin = true},
     setAdminFalse: state => {state.admin = false},
     setDrawerTrue: state => {state.drawer = true},
@@ -36,6 +45,4 @@ export default new Vuex.Store({
   },
   actions: {
   },
-  modules: {
-  }
 })

@@ -123,6 +123,7 @@ export default {
             .signOut()
             .then(function() {
             });
+            this.$store.commit("setAdminFalse")
             this.$router.push({ name: "Login" });
         },  
     },
@@ -135,7 +136,7 @@ export default {
 
 <style scoped>
 .mainContainer{
-    background-color: #FFE9AE;
+    background-color: #74cae0;
     padding: 10px;
 }
 .image{

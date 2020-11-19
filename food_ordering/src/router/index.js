@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import CustomerHome from '@/components/home/CustomerHome'
-import AdminHome from '@/components/home/AdminHome'
 import Login from '@/components/auth/Login'
 import CookMenu from '@/components/views/CookMenu'
 import ThankYou from '@/components/views/ThankYou'
@@ -26,11 +25,6 @@ const routes = [
     path: '/',
     name: 'Login',
     component: Login
-  },
-  {
-    path: '/adminHome',
-    name: 'AdminHome',
-    component: AdminHome
   },
   {
     path: '/cookMenu/:cook',

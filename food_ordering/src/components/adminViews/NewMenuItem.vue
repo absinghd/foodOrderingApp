@@ -134,6 +134,8 @@ export default {
         .signOut()
         .then(function() {
         });
+        this.$store.commit("setAdminFalse")
+        this.$store.commit("setUserLogout")
         this.$router.push({ name: "Login" });
     },
         gotoOrders(){
@@ -168,7 +170,8 @@ export default {
                   price: this.price,
                   menu_id:null,
                   quantity: 0,
-                  imageUrl: this.imageUrl
+                  imageUrl: this.imageUrl,
+                  cookName: this.user.displayName
               })
               .then(function(docRef) {
                 //console.log("Document written with ID: ", docRef.id)

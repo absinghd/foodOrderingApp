@@ -4,14 +4,25 @@
 
         <a class="orders" v-for="(order, i) in pastOrders" :key="i">
             <div class="orderItems">
-            <a>{{order.time}}</a>
-            <br>
+            <a class="timestamp">{{timestamps[i]}}</a> <br>
+  
             <a v-for="(item,x) in order.menuItems" :key="x">
-                <a v-if="item.quantity > 0">{{item.quantity}} {{item.name}}, </a>
+                <a class="orderItem" v-if="item.quantity > 0 && item.quantity <2 ">{{item.quantity}} {{item.name}}, </a>
+                <a class="orderItem" v-if="item.quantity > 1">{{item.quantity}} {{item.name}}s, </a>
             </a>
+           <!-- from {{order.cookName}} -->
             </div>
+            <br>
         </a>
+<br>
 
+<!--
+<a v-for="(timestamp, p) in timestamps" :key="p">
+
+  {{timestamp}}
+
+</a>
+-->
 
     <v-navigation-drawer
       v-model="drawer"
@@ -71,6 +82,7 @@
 
 <script>
 import firebase from 'firebase'
+import { format } from "date-fns";
 
 export default {
     name: 'History',
@@ -81,6 +93,7 @@ export default {
             cook: this.$route.params.cook,
             group: null,
             pastOrders:[],
+            timestamps:[]
 
         }
     },
@@ -113,18 +126,26 @@ export default {
             .signOut()
             .then(function() {
             });
+            this.$store.commit("setAdminFalse")
             this.$router.push({ name: "Login" });
         },  
     },
     created(){
         const db = firebase.firestore();
         //get all the orders
-        db.collection("orders").where("customer_uid", "==", this.user.uid)
+        db.collection("orders")
+        .where("customer_uid", "==", this.user.uid)
+        .orderBy('timestamp', 'desc')
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             let order = doc.data();
             this.pastOrders.push(order)
+            let timeS = order.timestamp.toDate();
+            this.timestamps.push(format(timeS,"PPp	"))
+            //this.timestamps.push(order.timestamp.toDate())
+            // let time = format(order.timestamp, "PPPP")
+            // this.timestamps.push(format(order.timestamp, "PPPP"))
           })})
 
     }
@@ -133,7 +154,7 @@ export default {
 
 <style scoped>
 .mainContainer{
-    background-color: #FFE9AE;
+    background-color: #74cae0;
     padding: 10px;
 }
 .title{
@@ -144,5 +165,11 @@ export default {
 }
 .orderItems{
     margin-top: 5px;
+}
+.timestamp{
+  color: #424242;
+}
+.orderItem{
+  color: #098196;
 }
 </style>
