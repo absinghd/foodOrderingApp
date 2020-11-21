@@ -43,7 +43,7 @@
     </div>
 
 
-<a>Menu</a>
+<p class="title">Menu</p>
 
 <a v-for="(item,i) in menu" :key="i">
 
@@ -183,7 +183,8 @@ export default {
 
 <style scoped>
 .mainContainer {
-  background-color: #ffe9ae;
+  background-color: #74cae0;
+  padding: 10px;
 }
 .active{
   color: green;
@@ -194,5 +195,9 @@ export default {
 .button{
   margin-left: 30%;
   margin-right: 30%;
+}
+.title{
+    text-align: center;
+    margin-bottom: -10px;
 }
 </style>

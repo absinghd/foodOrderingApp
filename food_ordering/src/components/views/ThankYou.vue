@@ -61,17 +61,19 @@
 
         
 
-        <a>Thanks for placing your order {{this.user.displayName}}!</a>
-        <p>Here is what you ordered from {{this.cook.name}}: <a>
+        <a class="thankYou">Thanks for placing your order <br>{{this.user.displayName}}!</a>
+        <p class="order">Here is what you ordered from {{this.cook.name}}: <a>
             <p v-for="(item, i) in menuItems" :key="i">
               <a v-if="item.quantity == 1">
-            {{item.quantity}} order of {{item.name}}
+            - {{item.quantity}} order of {{item.name}}
             </a>
               <a v-if="item.quantity > 1">
-            {{item.quantity}} orders of {{item.name}}s
+            - {{item.quantity}} orders of {{item.name}}s
             </a>
             </p>
             </a></p>
+
+            <p> You can make a Venmo payment of ${{this.total}} to <b>{{this.cook.venmo}}</b>.</p>
 
     </v-app>
 </template>
@@ -87,6 +89,7 @@ export default {
             cook:this.$route.params.cook,
             menuItems: this.$route.params.menuItems,
             group: null,
+            total: this.$route.params.total,
 
         }
     },
@@ -132,5 +135,14 @@ export default {
 <style scoped>
 .mainContainer{
     background-color: #74cae0;
+    padding: 10px;
+}
+.thankYou{
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+.order{
+  margin-top: 10px;
 }
 </style>

@@ -13,6 +13,7 @@
            <!-- from {{order.cookName}} -->
             </div>
             <br>
+            <v-divider class="divider" light></v-divider>
         </a>
 <br>
 
@@ -165,11 +166,16 @@ export default {
 }
 .orderItems{
     margin-top: 5px;
+    margin-left: 10px;
 }
 .timestamp{
   color: #424242;
 }
 .orderItem{
-  color: #098196;
+  color: #d9f5fc;
+}
+.divider{
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>

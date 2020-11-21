@@ -1,14 +1,12 @@
 <template>
   <v-app class="mainContainer"> 
 
-    <div>
+    <div v-if="!admin">
  <v-card
     class="mx-auto overflow-hidden"
   >
-
- 
-    <v-app-bar
-      color="#d7a4a4"
+    <v-app-bar 
+      color="#ff8f80"
       dark
     >
       <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>
@@ -16,7 +14,7 @@
       <!--<v-toolbar-title>{{ this.navbarTitle }}</v-toolbar-title>
       -->
     </v-app-bar>
-
+    
 
   </v-card>
     </div>
@@ -26,15 +24,16 @@
       <v-card
     class="mx-auto overflow-hidden"
   >
-
-    <v-app-bar
-      color="#d7a4a4"
+    <v-app-bar 
+      color="#ff8f80"
       dark
     >
       <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>{{ this.navbarTitle }}</v-toolbar-title>
+      <!-- <v-toolbar-title>{{ this.navbarTitle }}</v-toolbar-title>
+      -->
     </v-app-bar>
+    
 
   </v-card>
 
@@ -85,6 +84,6 @@ export default {
 
 <style scoped>
 .mainContainer{
-  background-color: #FFE9AE;
+  background-color: #74cae0;
 }
 </style>

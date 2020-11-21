@@ -62,7 +62,7 @@
 <div class="button">
 <div class="cooks" v-for="(cook, i) in cooks" :key="i" @click="cookMenu(cook)">
     <v-btn elevation="2"
-  large block color="#b9e8cf"> {{cook.name}}</v-btn>
+  large block color="#d9f5fc"> {{cook.name}}</v-btn>
   </div>
   </div>
 
@@ -99,6 +99,7 @@ export default {
     },
     methods:{
         cookMenu(cook){
+          this.$store.commit("setCook", cook)
       this.$router.push({
         name: "CookMenu",
         params: { user: this.user, cook: cook, },

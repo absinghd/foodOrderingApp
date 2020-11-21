@@ -1,6 +1,6 @@
 <template>
     <v-app class="mainContainer">
-
+      <p class="title">Past Orders</p>
 
     <div class="drawer">
 
@@ -162,7 +162,8 @@ export default {
 
 <style scoped>
 .mainContainer {
-  background-color: #ffe9ae;
+  background-color: #74cae0;
+  padding: 10px;
 }
 .tab {
   color: #424242;
@@ -172,7 +173,7 @@ export default {
   padding: 5px;
 }
 .completedOrders{
-  background-color: #FFC529;
+  background-color: #d9f5fc;
   padding: 5px;
 }
 .completed{
@@ -183,5 +184,9 @@ export default {
 }
 .orders{
   margin-top: 10px;
+}
+.title{
+    text-align: center;
+    margin-bottom: -10px;
 }
 </style>

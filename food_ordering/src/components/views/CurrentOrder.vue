@@ -8,6 +8,8 @@
                 <a class="orderItem" v-if="item.quantity > 0 && item.quantity == 1">{{item.quantity}} {{item.name}}, </a>
                 <a class="orderItem" v-if="item.quantity > 1">{{item.quantity}} {{item.name}}s, </a>
             </a>
+            <br>
+            <v-divider class="divider" light></v-divider>
 </div>
 <br>
         </a>
@@ -153,6 +155,7 @@ export default {
 }
 .orderItems{
     margin-top: 5px;
+    margin-left: 10px;
 }
 .orders{
     margin-top: 5px;
@@ -162,6 +165,10 @@ export default {
   color: #424242;
 }
 .orderItem{
-  color: #098196;
+  color: #d9f5fc;
+}
+.divider{
+  margin-top: 15px;
+  margin-bottom: -20px;
 }
 </style>

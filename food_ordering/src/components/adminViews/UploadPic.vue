@@ -6,7 +6,7 @@
     <!-- create a form that will not submit to a server but will prevent submit and
     use the upload function as a handle-->
     <form v-on:submit.prevent="upload">
-      <label for="file-input">Upload:</label>
+      
       <input
         id="file-input"
         type="file"
@@ -145,26 +145,32 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 form {
-  display: grid;
+  display: flex;
   padding: 1em;
   background: #f9f9f9;
   border: 1px solid #c1c1c1;
-  margin: 2rem auto 0 auto;
+  margin: 1rem auto 0 auto;
   max-width: 500px;
-  padding: 1em;
+  padding: 5px;
+  border-radius: 8px;
 }
 form input {
   background: #fff;
   border: 1px solid #9c9c9c;
+  border-radius: 5px;
+  margin-top: 6px;
 }
 form button {
-  background-color: blue;
+  background-color: #FE724C;
   color: white;
   font-size: 1em;
   font-weight: bold;
-  padding: 0.7em;
-  width: 100%;
+  width: 60%;
+  height: 90%;
   border: 0;
+  margin-left: 5px;
+  margin-top: 20px;
+  border-radius: 5px;
 }
 form button:hover {
   background: gold;
@@ -218,5 +224,9 @@ img {
 }
 .imgUpload{
     text-align: center;
+    color: #424242;
+}
+.upload{
+    margin-top: 7px;
 }
 </style>

@@ -61,9 +61,9 @@
    
     <v-tabs
       v-model="tab"
-      background-color=#ffe9ae
+      background-color=#d9f5fc
       color=#424242
-      slider-color=#FE724C
+      slider-color=#2e95ae
       grow
     >
       <v-tab
@@ -89,7 +89,7 @@
         </a>
       </p>
       
-      <v-btn @click="orderCompleted(order,e)">mark complete</v-btn>&nbsp;&nbsp;
+      <v-btn class="complete" @click="orderCompleted(order,e)">mark complete</v-btn>&nbsp;&nbsp;
 
       <a class="email">{{order.customerEmail}}</a>
       </v-card>
@@ -182,6 +182,7 @@ export default {
         const db = firebase.firestore();
         //get all the orders
         db.collection("orders").where("cook_uid", "==", this.user.uid)
+        
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
@@ -199,17 +200,18 @@ export default {
 
 <style scoped>
 .mainContainer {
-  background-color: #ffe9ae;
+  background-color: #74cae0;
+  padding: 10px;
 }
 .tab {
   color: #424242;
 }
 .openOrders{
-  background-color: rgb(255,197,41,.8);
+  background-color: #d9f5fc;
   padding: 5px;
 }
 .completedOrders{
-  background-color: #FFC529;
+  background-color: #d9f5fc;
   padding: 5px;
 }
 .completed{
@@ -224,5 +226,8 @@ export default {
 .email{
   text-align: right;
   margin-left: 8px;
+}
+.complete{
+  background-color: #ffb3aa;
 }
 </style>

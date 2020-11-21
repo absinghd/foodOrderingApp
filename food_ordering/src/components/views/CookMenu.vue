@@ -4,7 +4,7 @@
 
 <div class="cards">
 <div class="menuItems" v-for="(item, i) in menuItems" :key="i">
-    <v-card elevation='2'>
+    <v-card elevation='2' class="card">
         <v-card-title>{{item.name}}</v-card-title>
         <v-img class="image" :src="item.imageUrl" max-height="150" max-width='100'></v-img>
        
@@ -20,25 +20,30 @@
 
         <div class="counter">
            <v-btn
-            color="#b9e8cf"
+            color="#ffb3aa"
             elevation="2"
             rounded
+            
             >
-            <a @click="minusItemQuantity(item.name, item.quantity, i)"> <v-icon color="#424242">mdi-minus</v-icon> </a>
+            <a class="minus" @click="minusItemQuantity(item.name, item.quantity, i)"> <v-icon color="#424242">mdi-minus</v-icon> </a>
             <a class="quantity"> {{item.quantity}}</a>
-            <a @click="plusItemQuantity(item.name, item.quantity, i)"> <v-icon color="#424242">mdi-plus</v-icon> </a>
+            <a class="plus" @click="plusItemQuantity(item.name, item.quantity, i)"> <v-icon color="#424242">mdi-plus</v-icon> </a>
             </v-btn>
         </div>
 
     </v-card>
 </div>
 
+<div class="total">
+<a class="total">Total: ${{this.total}}</a> <br>
+</div>
+
 <div class="placeOrder">
-    <a class="total">Total: </a>
     <a class="submit"><v-btn
     @click="placeOrder"
   elevation="2"
-  color="#b9e8cf"
+  color="#ff8f80"
+  class="placeOrderText"
 
 >
 Place Order
@@ -116,15 +121,16 @@ export default {
     name: 'CookMenu',
     data(){
         return{
-            cook: this.$route.params.cook,
+            cook: this.$store.getters.getCook,
             group: null,
-            title: 'cake',
+            title: null,
             navbarTitle: this.$store.getters.getNavbarTitle,
             menuItems: [],
             originalMenu: [],
             user: this.$store.getters.getUser,
             quantity:0,
-            itemImage: "https://embed.widencdn.net/img/mccormick/c45v26nn3c/1365x1365px/Fish_Tacos_243.jpg?crop=true&anchor=342,0&q=80&r=90&color=ffffffff&u=o2hyef"
+            total: 0,
+            itemImage: "https://cdn.shopify.com/s/files/1/0918/4570/products/noimage_ac50db86-66f8-45a1-87dd-b4b23746ce06_540x.gif?v=1597171830"
         }
     },
     computed:{
@@ -157,14 +163,20 @@ export default {
            if(quantity > 0){
           quantity--;
           this.menuItems[i].quantity = quantity
-          console.log('order '+quantity +" "+ item);          
+          //console.log('order '+quantity +" "+ item);          
           //console.log(this.menuItems);
+          let price = this.menuItems[i].price
+          this.total = this.total - (1 * price)
+          console.log(this.total);
            }
         },
         plusItemQuantity(item, quantity, i){
           quantity++;
           this.menuItems[i].quantity = quantity
-          console.log('order '+quantity +" "+ item);
+          //console.log('order '+quantity +" "+ item);
+          let price = this.menuItems[i].price
+          this.total = this.total + (1 * price)
+          console.log(this.total);
           //console.log(this.menuItems);        
         },
         placeOrder(){
@@ -185,7 +197,8 @@ export default {
                menuItems: this.menuItems,
                completed: false,
                orderId: orderId,
-               cookName: this.cook.name
+               cookName: this.cook.name,
+               total: this.total
                
            })
            this.$store.commit("setCurrentOrder", this.menuItems)
@@ -194,7 +207,7 @@ export default {
             console.log(this.user.display);
           this.$router.push({
         name: "ThankYou",
-        params: { user: this.user, cook: this.cook, menuItems: this.menuItems},
+        params: { user: this.user, cook: this.cook, menuItems: this.menuItems, total: this.total},
       })
         },
     logout() {
@@ -236,6 +249,9 @@ export default {
     text-align: center;
     margin-top: 10px;
 }
+.card{
+  background-color: #d9f5fc;
+}
 .menuItems{
     margin-top: 10px;
 }
@@ -263,15 +279,28 @@ export default {
     padding: 10px;
     margin-top: 5px;
 }
+.placeOrderText{
+    color: #424242;
+}
 .submit{
-    text-align: center; 
+    text-align: center;    
 }
 .total{
-    text-align: left;
+  text-align: left;
+    color: white;
+    margin-top: 7px;
+    font-size: 18px;
+    margin-left: 3px;
 }
 .image{
   padding: 10px;
   margin-left: 10px;
   margin-bottom: 10px;
+}
+.minus{
+  margin-right: 7px;
+}
+.plus{
+  margin-left: 7px;
 }
 </style>

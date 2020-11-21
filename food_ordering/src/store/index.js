@@ -20,7 +20,8 @@ export default new Vuex.Store({
     cooks:null,
     navbarTitle: null,
     currentOrder:null,
-    uploadImageUrl: null
+    uploadImageUrl: null,
+    cook: null
   },
   getters:{
     getUser: (state) => { return state.user; },
@@ -29,7 +30,8 @@ export default new Vuex.Store({
     getCooks: (state) => {return state.cooks},
     getNavbarTitle: (state) => {return state.navbarTitle},
     getCurrentOrder: (state) => {return state.currentOrder},
-    getUploadImageUrl: (state) => {return state.uploadImageUrl}
+    getUploadImageUrl: (state) => {return state.uploadImageUrl},
+    getCook: (state) => { return state.cook },
   },
   mutations: {
     setUser: state => { state.user = Firebase.auth().currentUser},
@@ -41,7 +43,8 @@ export default new Vuex.Store({
     setNavbarTitle: (state,title) => {state.navbarTitle = title},
     setCooks: (state, cooks) => {state.cooks = cooks},
     setCurrentOrder: (state, menuItems) => {state.currentOrder = menuItems},
-    setUploadImageUrl: (state, imageUrl) => {state.uploadImageUrl = imageUrl}
+    setUploadImageUrl: (state, imageUrl) => {state.uploadImageUrl = imageUrl},
+    setCook: (state, cook) => {state.cook = cook}
   },
   actions: {
   },

@@ -9,7 +9,7 @@ contain
 position="center"
   lazy-src="https://picsum.photos/id/11/10/6"
   max-height="150"
-  max-width="250"
+  max-width="150"
  :src="userPhotoURL"
 ></v-img>
 </div>
@@ -141,10 +141,13 @@ export default {
 }
 .image{
     margin-top: 10px;
+    border: #a2e2f0;
+    border-style: solid;
 }
 .userInfo{
     text-align: center;
     margin-top: 50px;
+    color: #d9f5fc;
 }
 .content{
     display: flex;

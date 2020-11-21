@@ -21,6 +21,9 @@ new Vue({
   render: h => h(App),
   // Your web app's Firebase configuration
   created() {  var firebaseConfig = {
+
+
+//DEVELOPMENT MODE
     apiKey: "AIzaSyDQUZzp8BI-H-Vn3vUjLC35o4y-eZDEEs0",
     authDomain: "foodordering-559.firebaseapp.com",
     databaseURL: "https://foodordering-559.firebaseio.com",
@@ -29,6 +32,20 @@ new Vue({
     messagingSenderId: "155394733334",
     appId: "1:155394733334:web:2e6d03750096fa419e0c37",
     measurementId: "G-FSTN3EWKWD"
+
+
+
+//PRODUCTION MODE
+    // apiKey: "AIzaSyDZ0kohndQ3zkeRPpWlRK9AWzKRTwQhqQI",
+    // authDomain: "foodiefoodie-00.firebaseapp.com",
+    // databaseURL: "https://foodiefoodie-00.firebaseio.com",
+    // projectId: "foodiefoodie-00",
+    // storageBucket: "foodiefoodie-00.appspot.com",
+    // messagingSenderId: "1012897778532",
+    // appId: "1:1012897778532:web:40a48cc69b579567a34871",
+    // measurementId: "G-R5L6494M11"
+
+
   };
   firebase.initializeApp(firebaseConfig)
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)

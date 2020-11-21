@@ -92,7 +92,7 @@ export default {
 
 <style scoped>
 .mainContainer {
-  background-color: #ffe9ae;
+  background-color: #74cae0;
 }
 .login {
   background-color: white;
