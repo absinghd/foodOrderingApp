@@ -132,13 +132,14 @@ export default {
         // de.collection("orders").where("customer_uid", "==", this.user.uid)
         const de = db.collection("orders").where("completed", "==", false);
         de.where("customer_uid", "==", this.user.uid)
+        .orderBy('timestamp', 'desc')
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
             let order = doc.data();
             this.openOrders.push(order)
             let timeS = order.timestamp.toDate();
-            this.timestamps.push(format(timeS,"PPp	"))
+            this.timestamps.push(format(timeS,"PPp"))
           })})
 
     }

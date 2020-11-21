@@ -1,7 +1,7 @@
 {
   "projects": {
     "default": "foodordering-559",
-    "productionApp": "foodiefoodie-00",
-    "developmentApp": "foodordering-559"
+    "dev": "foodordering-559",
+    "prod": "foodiefoodie-00"
   }
 }

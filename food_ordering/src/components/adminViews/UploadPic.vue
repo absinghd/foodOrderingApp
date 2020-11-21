@@ -122,14 +122,14 @@ export default {
               this.errors.push(error);
               console.log(this.error);
             })
-            .finally(() => {
-              setTimeout(
-                function() {
-                  this.showProgress = false;
-                }.bind(this),
-                1000
-              );
-            });
+            // .finally(() => {
+            //   setTimeout(
+            //     function() {
+            //       this.showProgress = false;
+            //     }.bind(this),
+            //     1000
+            //   );
+            // });
         }.bind(this),
         false
       );

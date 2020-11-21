@@ -11,8 +11,8 @@
     >
       <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>
 
-      <!--<v-toolbar-title>{{ this.navbarTitle }}</v-toolbar-title>
-      -->
+      <v-toolbar-title>{{ this.ENV }}</v-toolbar-title>
+      
     </v-app-bar>
     
 
@@ -30,8 +30,9 @@
     >
       <v-app-bar-nav-icon @click="setDrawerTrue" v-click-outside="setDrawerFalse"></v-app-bar-nav-icon>
 
-      <!-- <v-toolbar-title>{{ this.navbarTitle }}</v-toolbar-title>
-      -->
+      <v-toolbar-title>{{ this.ENV }}</v-toolbar-title>
+
+
     </v-app-bar>
     
 
@@ -53,6 +54,7 @@ export default {
       drawer: this.$store.getters.getDrawer,
       navbarTitle: this.$store.getters.getNavbarTitle,
       user: this.$store.getters.getUser,
+      ENV: process.env.VUE_APP_ENV === 'dev' ? 'DEV MODE' : null,
     }
   },
   methods:{

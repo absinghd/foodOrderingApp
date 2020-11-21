@@ -5,15 +5,48 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "customer_uid",
+          "order": "ASCENDING"
+        },
+        {
           "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "orders",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "time",
           "order": "DESCENDING"
         },
         {
-          "fieldPath": "customer_uid",
-          "order": "ASCENDING"
+          "fieldPath": "completed",
+          "order": "DESCENDING"
         }
       ]
     }
   ],
-  "fieldOverrides": []
+  "fieldOverrides": [
+    {
+      "collectionGroup": "orders",
+      "fieldPath": "time",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        }
+      ]
+    }
+  ]
 }

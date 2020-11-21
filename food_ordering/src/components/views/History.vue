@@ -143,7 +143,7 @@ export default {
             let order = doc.data();
             this.pastOrders.push(order)
             let timeS = order.timestamp.toDate();
-            this.timestamps.push(format(timeS,"PPp	"))
+            this.timestamps.push(format(timeS,"PPp"))
             //this.timestamps.push(order.timestamp.toDate())
             // let time = format(order.timestamp, "PPPP")
             // this.timestamps.push(format(order.timestamp, "PPPP"))
