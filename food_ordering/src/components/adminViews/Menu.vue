@@ -103,32 +103,35 @@ export default {
   },
   methods: {
     printActive(status,i){
-      console.log(this.activeItems);
+      //console.log(this.activeItems);
+      //console.log(`status was ${status} for index = ${i}`);
       const db = firebase.firestore();
       if(status == 'true'){
     db.collection("menu")
-      .doc(this.menu[i].menuId)
+      .doc(this.menu[i].menu_id)
       .update({
         active:'false'
       })
       } else{
     db.collection("menu")
-      .doc(this.menu[i].menuId)
+      .doc(this.menu[i].menu_id)
       .update({
         active:'true'
       })
       }
       this.menu = [];
-          db.collection("menu")
+      db.collection("menu")
       .where("cook_uid", "==", this.user.uid)
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           let item = doc.data();
           this.menu.push(item);
-          
         });
       });
+
+     // console.log(`user_id: ${this.user.uid}`);
+      // console.log(`this menu item: ${this[i]`);
     },
     logout() {
       firebase

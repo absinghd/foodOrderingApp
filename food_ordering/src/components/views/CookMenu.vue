@@ -5,7 +5,7 @@
 <div class="cards">
 <div class="menuItems" v-for="(item, i) in menuItems" :key="i">
     <v-card elevation='2' class="card">
-        <v-card-title>{{item.name}}</v-card-title>
+        <v-card-title><a class="itemTitle">{{item.name}}</a></v-card-title>
         <v-img class="image" :src="item.imageUrl" max-height="150" max-width='100'></v-img>
        
        <div class="ingredients">
@@ -15,7 +15,7 @@
 
 
         <div class="price">
-        <a>Price: </a><a class="ingredient">{{item.price}}</a>
+        <a>Price: </a><span class="ingredient">${{item.price}}</span>
         </div>
 
         <div class="counter">
@@ -302,5 +302,20 @@ export default {
 }
 .plus{
   margin-left: 7px;
+}
+.itemTitle{
+  font-size: .9em;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 320px){
+.itemTitle{
+  font-size: .7em;
+}
+}
+@media (max-width: 360px){
+.itemTitle{
+  font-size: .82em;
+}
 }
 </style>

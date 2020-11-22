@@ -131,12 +131,18 @@ export default {
     created(){
         const db = firebase.firestore();
         //get all the cooks
-        db.collection("admin")     
+        //db.collection("admin")
+        db.collection("roles").where("cook", "==", true)
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            let cook = doc.data();
-            this.cooks.push(cook)
+            const cook_uid = doc.id;
+            db.collection("users").doc(cook_uid)
+            .get()
+            .then((snapshot) => {
+            this.cooks.push(snapshot.data())
+            })
+
           })})
         //console.log(this.cooks);
         this.user = this.$store.getters.getUser;

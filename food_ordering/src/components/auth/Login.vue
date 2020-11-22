@@ -5,6 +5,15 @@
         Google Login
       </v-btn>
     </div>
+       
+       <div v-if="this.progress == true">
+        <v-progress-circular
+        class="progress"
+      indeterminate
+      color="amber"
+    ></v-progress-circular>
+    </div>
+
   </v-app>
 </template>
 
@@ -18,6 +27,7 @@ export default {
       user: null,
       token: null,
       cooks: null,
+      progress: this.$store.getters.getProgress,
     };
   },
   methods: {
@@ -27,10 +37,22 @@ export default {
       //login with popup window
       firebase
         .auth()
-        .signInWithPopup(provider)
-        .then((result) => {
+        .signInWithRedirect(provider)
+        .catch((err) => {
+          this.feedback = err.message;
+        });
+        this.$store.commit("setProgressTrue")
+    },
+  },
+   created(){
+     this.progress =this.$store.getters.getProgress
+     console.log(this.progress);
+          firebase.auth().getRedirectResult().then((result) => {
+          if(result.credential){
           this.token = result.credential.accessToken;
           this.user = result.user;
+          }
+          this.$store.commit("setProgressFalse")
           //log user data
           //console.log(this.user);
           this.$store.commit("setUser");
@@ -47,14 +69,19 @@ export default {
                 photoUrl: this.user.photoURL,
                 phoneNumber: this.user.phoneNumber,
               });
-              let adminRef = db.collection("admin").doc(this.user.uid);
-              adminRef.get().then((doc) => {
-                if (doc.exists) {
+              //let adminRef = db.collection("admin").doc(this.user.uid);
+              // adminRef.get().then((doc) => {
+              let rolesRef = db.collection('roles').doc(this.user.uid);
+              rolesRef.get().then((doc) => {
+                const rolesData = doc.data();
+                if (rolesData && rolesData.cook === true) {
+                  // check if role cook === true
+
                   this.$store.commit("setAdminTrue");
                   this.$router.push({
                     name: "Orders",
                     params: { user: this.user },
-                  });
+                  })
                 } else {
                   this.$store.commit("setAdminFalse");
                   this.$router.push({
@@ -77,16 +104,10 @@ export default {
               });
             }
           });
+          
         })
 
-        .catch((err) => {
-          this.feedback = err.message;
-        });
-    },
-  },
-  // created(){
-
-  // }
+   }
 };
 </script>
 
@@ -104,5 +125,11 @@ export default {
   left: 50%;
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
+}
+.progress{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25%;
+
 }
 </style>
