@@ -1,7 +1,6 @@
 <template>
     <v-app class="mainContainer">
         
-
 <div class="cards">
 <div class="menuItems" v-for="(item, i) in menuItems" :key="i">
     <v-card elevation='2' class="card">
@@ -36,6 +35,21 @@
 
 <div class="total">
 <a class="total">Total: ${{this.total}}</a> <br>
+</div>
+
+<div class="notes">
+        <v-col
+          cols="12"
+          sm="6"
+          md="3"
+        >
+          <v-text-field
+          v-model="notes"
+            label="Additional Notes"
+            placeholder="Delivery preferences, allergies, etc."
+            outlined
+          ></v-text-field>
+        </v-col>
 </div>
 
 <div class="placeOrder">
@@ -130,7 +144,8 @@ export default {
             user: this.$store.getters.getUser,
             quantity:0,
             total: 0,
-            itemImage: "https://cdn.shopify.com/s/files/1/0918/4570/products/noimage_ac50db86-66f8-45a1-87dd-b4b23746ce06_540x.gif?v=1597171830"
+            itemImage: "https://cdn.shopify.com/s/files/1/0918/4570/products/noimage_ac50db86-66f8-45a1-87dd-b4b23746ce06_540x.gif?v=1597171830",
+            notes: null,
         }
     },
     computed:{
@@ -147,6 +162,7 @@ export default {
         },
     },
     methods: {
+      
         goCustomerHome(){
             this.$router.push({ name: "CustomerHome" })
         },
@@ -198,13 +214,14 @@ export default {
                completed: false,
                orderId: orderId,
                cookName: this.cook.name,
-               total: this.total
+               total: this.total,
+               notes: this.notes
                
            })
            this.$store.commit("setCurrentOrder", this.menuItems)
            console.log('original');
-            console.log(this.originalMenu);
-            console.log(this.user.display);
+            //console.log(this.originalMenu);
+            console.log(this.cook);
           this.$router.push({
         name: "ThankYou",
         params: { user: this.user, cook: this.cook, menuItems: this.menuItems, total: this.total},
@@ -276,8 +293,8 @@ export default {
     color: #424242;
 }
 .placeOrder{
-    padding: 10px;
-    margin-top: 5px;
+    padding: 0px;
+    margin-top: -20px;
 }
 .placeOrderText{
     color: #424242;
@@ -289,7 +306,7 @@ export default {
   text-align: left;
     color: white;
     margin-top: 7px;
-    font-size: 18px;
+    font-size: 22px;
     margin-left: 3px;
 }
 .image{

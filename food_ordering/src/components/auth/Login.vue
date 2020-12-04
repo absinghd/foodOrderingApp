@@ -6,9 +6,9 @@
       </v-btn>
     </div>
        
-       <div v-if="this.progress == true">
+       <div v-if="this.progress == true" class="progress">
+         <span>You're being logged in...</span>  &nbsp; &nbsp;
         <v-progress-circular
-        class="progress"
       indeterminate
       color="amber"
     ></v-progress-circular>

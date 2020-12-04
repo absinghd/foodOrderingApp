@@ -55,6 +55,7 @@
       :value="item.name"
       @click="printActive('true',i)"
     ></v-switch>
+    <v-icon class="delete" @click="deleteMenuItem(item.menu_id)">mdi-delete-outline</v-icon>
 
   </a>
   <a v-if="item.active=='false'" class="notActive">
@@ -65,7 +66,7 @@
       :value="item.name"
       @click="printActive('false',i)"
     ></v-switch>
-
+    <v-icon class="delete" @click="deleteMenuItem(item.menu_id)">mdi-delete-outline</v-icon>
   </a>
 </a>
 
@@ -162,6 +163,24 @@ export default {
       name: "NewMenuItem",
       params: { user: this.user },
     })
+    },
+    deleteMenuItem(id) {
+      const db = firebase.firestore();
+      //delete doc from firestore
+      db.collection('menu').doc(id).delete()
+      .then(()=> {
+      this.menu = [];
+      db.collection("menu")
+      .where("cook_uid", "==", this.user.uid)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          let item = doc.data();
+          this.menu.push(item);
+        });
+      });
+      
+      })
     }
   },
   created() {
@@ -191,9 +210,11 @@ export default {
 }
 .active{
   color: green;
+  margin-right: 25px;
 }
 .notActive{
   color: red;
+  margin-right: 25px;
 }
 .button{
   margin-left: 30%;
@@ -202,5 +223,9 @@ export default {
 .title{
     text-align: center;
     margin-bottom: -10px;
+}
+.delete{
+  margin-left: 80%;
+  margin-top: -87px;
 }
 </style>

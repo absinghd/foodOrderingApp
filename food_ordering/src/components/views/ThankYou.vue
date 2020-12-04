@@ -73,7 +73,18 @@
             </p>
             </a></p>
 
-            <p> You can make a Venmo payment of ${{this.total}} to <b>{{this.cook.venmo}}</b>.</p>
+            <p class="venmoText"> You can make a Venmo payment <br> of ${{this.total}} to <b>{{this.cook.venmo}}</b>.</p>
+
+<!--Copy Venmo ID Button
+<div class="copyButton">
+            <v-btn
+  @click="copyVenmoId"
+  elevation="2"
+  color="#3d95ce"
+  width="180"
+>Copy Venmo ID</v-btn>
+</div>
+-->
 
     </v-app>
 </template>
@@ -128,6 +139,9 @@ export default {
         this.$store.commit("setAdminFalse")
         this.$router.push({ name: "Login" });
     },
+    // copyVenmoId(){
+    //   console.log();
+    // }
     }
 }
 </script>
@@ -144,5 +158,11 @@ export default {
 }
 .order{
   margin-top: 10px;
+}
+.venmoText{
+  text-align: center;
+}
+.copyButton{
+  text-align: center;
 }
 </style>

@@ -80,18 +80,19 @@
 <div class="openTab" v-if="!this.tab">
     <div class="orders" v-for="(order,e) in orders" :key="e">
       <v-card class="openOrders" v-if="order.completed==false">
-      <p>Name: {{order.customerName}}</p>
-      <p>Order:</p>
+      <p><b>Name: </b> {{order.customerName}}</p>
+      <p><b>Order: </b></p>
       <p v-for="(item,u) in order.menuItems" :key="u">
         <a v-if="item.quantity > 0">
-        <a>{{item.quantity}} </a>
+        <a><b>- </b>{{item.quantity}} </a>
         <a>{{item.name}}</a>
         </a>
       </p>
+      <span><b>Notes:</b> {{order.notes}}</span> <br><br>
+      <span class="email"><b>Email: </b>{{order.customerEmail}}</span>
       
       <v-btn class="complete" @click="orderCompleted(order,e)">mark complete</v-btn>&nbsp;&nbsp;
 
-      <a class="email">{{order.customerEmail}}</a>
       </v-card>
     </div>
 </div>
@@ -99,15 +100,16 @@
 <div class="completed" v-if="this.tab">
     <v-card class="orders" v-for="(order,e) in orders" :key="e">
       <div class="completedOrders" v-if="order.completed==true">
-      <p>Name: {{order.customerName}}</p>
-      <p>Order:</p>
+      <p><b>Name: </b> {{order.customerName}}</p>
+      <p><b>Order: </b></p>
       <p v-for="(item,u) in order.menuItems" :key="u">
         <a v-if="item.quantity > 0">
-        <a>{{item.quantity}} </a>
+        <a><b>- </b>{{item.quantity}} </a>
         <a>{{item.name}}</a> 
         </a>
       </p>
-      <a>{{order.customerEmail}}</a>
+      <span><b>Notes:</b> {{order.notes}}</span> <br><br>
+      <span class="email"><b>Email: </b>{{order.customerEmail}}</span>
       </div>
     </v-card>
 </div>
@@ -176,13 +178,13 @@ export default {
         })
   //  //update this.orders
         this.orders[e].completed = true;
-        }
+        },
     },
     created(){
         const db = firebase.firestore();
         //get all the orders
         db.collection("orders").where("cook_uid", "==", this.user.uid)
-        
+        .orderBy('timestamp', 'desc')
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
@@ -225,9 +227,11 @@ export default {
 }
 .email{
   text-align: right;
-  margin-left: 8px;
+  margin-left: 0px;
 }
 .complete{
   background-color: #ffb3aa;
+  margin-top: 5px;
+  padding: 5px;
 }
 </style>

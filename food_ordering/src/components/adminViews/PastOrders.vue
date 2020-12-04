@@ -66,16 +66,17 @@
       <div class="completedOrders">
           <a>{{order.time}}</a>
       
-      <p>Name: {{order.customerName}}</p>
-      <p>Order: 
-      </p>
-      
+      <p><b>Name: </b> {{order.customerName}}</p>
+      <p><b>Order: </b></p>
+
       <p v-for="(item,u) in order.menuItems" :key="u">
         <a v-if="item.quantity > 0">
-        <a>{{item.quantity}} </a>
-        <a>{{item.name}}</a>
+        <a><b>- </b>{{item.quantity}} </a>
+        <a>{{item.name}}</a> 
         </a>
       </p>
+      <span><b>Notes:</b> {{order.notes}}</span> <br><br>
+      <span class="email"><b>Email: </b>{{order.customerEmail}}</span>
       
       </div>
       
@@ -145,6 +146,7 @@ export default {
         const db = firebase.firestore();
         //get all the orders
         db.collection("orders").where("cook_uid", "==", this.user.uid)
+        .orderBy('timestamp', 'desc')
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
