@@ -11,6 +11,7 @@ import CurrentOrder from '@/components/views/CurrentOrder'
 import History from '@/components/views/History'
 import CustomerProfile from '@/components/views/CustomerProfile'
 import PastOrders from '@/components/adminViews/PastOrders'
+import Login_00 from '@/components/auth/Login_00'
 
 
 Vue.use(VueRouter)
@@ -25,6 +26,11 @@ const routes = [
     path: '/',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/login_00',
+    name: 'Login_00',
+    component: Login_00
   },
   {
     path: '/cookMenu/:cook',

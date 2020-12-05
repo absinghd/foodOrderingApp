@@ -14,7 +14,7 @@
     ></v-progress-circular>
     </div>
 
-  </v-app>
+  </v-app> 
 </template>
 
 <script>
