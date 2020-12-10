@@ -117,10 +117,14 @@ export default {
     },
     methods:{
         logout(){
-          this.$store.commit("setAdminFalse")
-        this.$store.commit("setUserLogout")
-            this.$router.push({ 
-            name: "Login"}) 
+          firebase
+            .auth()
+            .signOut()
+            .then(function() {
+            });
+            this.$store.commit("setAdminFalse")
+            this.$store.commit("setUserLogout")
+            this.$router.push({ name: "Login" });
         },
         gotoOrders(){
             this.$router.push({ 

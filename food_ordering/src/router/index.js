@@ -12,6 +12,7 @@ import History from '@/components/views/History'
 import CustomerProfile from '@/components/views/CustomerProfile'
 import PastOrders from '@/components/adminViews/PastOrders'
 import Login_00 from '@/components/auth/Login_00'
+import SuccessfulLogin from '@/components/auth/SuccessfulLogin'
 
 
 Vue.use(VueRouter)
@@ -31,6 +32,11 @@ const routes = [
     path: '/login_00',
     name: 'Login_00',
     component: Login_00
+  },
+  {
+    path: '/success',
+    name: 'SuccessfulLogin',
+    component: SuccessfulLogin
   },
   {
     path: '/cookMenu/:cook',

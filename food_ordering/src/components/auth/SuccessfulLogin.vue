@@ -1,9 +1,8 @@
 <template>
   <v-app class="mainContainer">
     <div class="login">
-<p class="title">Order Local Food</p>
+<p class="title">Login Successful</p>
 
-<section id="firebaseui-auth-container"></section>
 
     </div>
 
@@ -12,30 +11,20 @@
 
 <script>
 import firebase from "firebase";
-import * as firebaseui from "firebaseui";
-import "firebaseui/dist/firebaseui.css";
+
 
 export default {
-  name: "CustomerLogin",
+  name: "Login_00",
   data() {
     return {
       user: null,
       token: null,
       cooks: null,
       admin: false,
-      //progress: this.$store.getters.getProgress,
     };
 },
 created() {
-       firebase.auth().onAuthStateChanged(user => {
-           if (user) {
-               this.user = user;
-               this.$store.commit("setUser");
-               console.log('user exists');
-      //      }
-      //  });
-          //save into users collections
-          console.log(this.user.displayName);
+
           const db = firebase.firestore();
           let ref = db.collection("users").doc(this.user.uid);
           ref.get().then((doc) => {
@@ -84,35 +73,6 @@ created() {
               });
             }
           });
-
-                     }
-       });
-          //console.log(`login created ${this.user.displayName}`);
-   },
-mounted() {
-        let ui = firebaseui.auth.AuthUI.getInstance();
-          if (!ui) {
-              ui = new firebaseui.auth.AuthUI(firebase.auth());
-          }
-
-    //       if(this.admin === true){
-    //         const uiConfig = {
-    //         signInSuccessUrl: "/orders",
-    //         signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID, firebase.auth.FacebookAuthProvider.PROVIDER_ID]
-    //     };
-    //     ui.start("#firebaseui-auth-container", uiConfig);
-    // }
-    //      else{
-
-        const uiConfig = {
-            signInSuccessUrl: "/",
-            signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-             //firebase.auth.FacebookAuthProvider.PROVIDER_ID
-             ]
-        };
-        ui.start("#firebaseui-auth-container", uiConfig);
-   // }
-  
 }
 }
 </script>

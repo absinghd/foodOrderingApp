@@ -129,6 +129,7 @@ export default {
         },
     },
     created(){
+      console.log(`customer home ${this.user.displayName}`);
         const db = firebase.firestore();
         //get all the cooks
         //db.collection("admin")
