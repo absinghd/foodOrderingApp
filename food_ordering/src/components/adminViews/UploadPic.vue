@@ -40,9 +40,6 @@ Vue.use(axios)
 
 export default {
   name: "CloudinaryUpload",
-  components: {
-    
-  },
   data() {
 
     return {

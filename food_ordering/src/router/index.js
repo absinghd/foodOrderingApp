@@ -13,6 +13,8 @@ import CustomerProfile from '@/components/views/CustomerProfile'
 import PastOrders from '@/components/adminViews/PastOrders'
 import Login_00 from '@/components/auth/Login_00'
 import SuccessfulLogin from '@/components/auth/SuccessfulLogin'
+import Test from '@/components/views/Test'
+
 
 
 Vue.use(VueRouter)
@@ -82,6 +84,11 @@ const routes = [
     path: '/pastOrders',
     name: 'PastOrders',
     component: PastOrders
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
   },
 ]
 
