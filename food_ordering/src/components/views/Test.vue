@@ -82,7 +82,17 @@ export default {
     },
     components: {
         PayPalPayment
-  },
+    },
+    computed:{
+        drawer: {
+        get(){
+            return this.$store.getters.getDrawer;
+        },
+        set(){
+            return null
+        } 
+        },
+    },
   methods:{
 
         logout() {
