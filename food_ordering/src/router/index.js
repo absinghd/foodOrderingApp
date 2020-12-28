@@ -14,7 +14,7 @@ import PastOrders from '@/components/adminViews/PastOrders'
 import Login_00 from '@/components/auth/Login_00'
 import SuccessfulLogin from '@/components/auth/SuccessfulLogin'
 import Test from '@/components/views/Test'
-
+import ChefProfile from '@/components/adminViews/ChefProfile'
 
 
 Vue.use(VueRouter)
@@ -64,6 +64,11 @@ const routes = [
     path: '/addNewMenuItem',
     name: 'NewMenuItem',
     component: NewMenuItem
+  },
+  {
+    path: '/chefProfile',
+    name: 'ChefProfile',
+    component: ChefProfile
   },
   {
     path: '/curretOrder',

@@ -223,7 +223,10 @@ export default {
             //console.log(this.originalMenu);
             console.log(this.cook);
           this.$router.push({
-        name: "ThankYou",
+        // //to the thank you page
+        // name: "ThankYou",
+        //to the paypal page
+        name: "Test",
         params: { user: this.user, cook: this.cook, menuItems: this.menuItems, total: this.total},
       })
         },

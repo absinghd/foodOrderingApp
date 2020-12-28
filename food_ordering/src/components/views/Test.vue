@@ -2,7 +2,7 @@
     <v-app class="mainContainer">
         <p class="title">Test Page</p>
 
-        <PayPalPayment></PayPalPayment>
+        <StripePayment></StripePayment>
 
 
 
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import PayPalPayment from '../payment/PayPalPayment'
+import StripePayment from '../payment/StripePayment'
 import firebase from 'firebase'
 
 
@@ -81,7 +81,7 @@ export default {
         }
     },
     components: {
-        PayPalPayment
+        StripePayment
     },
     computed:{
         drawer: {
@@ -105,17 +105,17 @@ export default {
         this.$store.commit("setUserLogout")
         this.$router.push({ name: "Login" });
     },
-        gotoOrders(){
-            this.$router.push({ 
-            name: "Orders"}) 
+        goCustomerHome(){
+            this.$router.push({ name: "CustomerHome" })
         },
-        gotoMenu(){
-            this.$router.push({ 
-            name: "Menu"}) 
+        goCustomerProfile(){
+            this.$router.push({ name: "CustomerProfile" })
         },
-        gotoPastOrder(){
-            this.$router.push({ 
-            name: "PastOrders"}) 
+        goCustomerHistory(){
+            this.$router.push({ name: "History" })
+        },
+        goCurrentOrder(){
+            this.$router.push({ name: "CurrentOrder" })
         },
   },
 

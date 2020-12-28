@@ -1,46 +1,67 @@
 <template>
-<v-app class="mainContainer">
-  <script src="https://www.paypal.com/sdk/js?client-id=ARReLv-LJcOC813HUXOc_xsA6GajOhZPMgZ69QDVPZwAMPOTWVYXT2CPj6kk7fxM47bK2ymEV3oFD0Xi"></script>
-<p class="title">PayPal Payment Component</p>
+  <v-app class="mainContainer">
 
-  <div>
+    <span class="thankYou">
+      <b>Thanks for placing your order {{ this.user.displayName }}!</b>
+    </span> <br>
+    <p class="order">
+      Here is what you ordered:
+      <span>
+        <p v-for="(item, i) in menuItems" :key="i">
+          <span v-if="item.quantity == 1">
+            - {{ item.quantity }} order of {{ item.name }}
+          </span>
+          <span v-if="item.quantity > 1">
+            - {{ item.quantity }} orders of {{ item.name }}s
+          </span>
+        </p>
+      </span>
+    </p>
+
+
     <div v-if="!paidFor">
-      <h1>Buy this Lamp - ${{ product.price }} OBO</h1>
+      <h1> Price: ${{ this.total }} </h1>
 
-      <p>{{ product.description }}</p>
+      <div ref="paypal"></div>
+      <!-- 
+      <p>{{ product.description }}</p> -->
 
     </div>
 
     <div v-if="paidFor">
-      <h1>Noice, you bought a beautiful lamp!</h1>
+       <h1 class="paid">Thanks, {{this.cook.name}} will begin working on your order!</h1>
     </div>
 
-    <div ref="paypal"></div>
-  </div>
-
-
-</v-app>
+   <!-- <div ref="paypal"></div>
+   -->
+  </v-app>
 </template>
- 
-<script>
 
+<script>
 export default {
-  name:'PayPalPayment',
-  data(){
-         return {
+  name: "PayPalPayment",
+
+  data: function() {
+    return {
+      user: this.$route.params.user,
+      cook: this.$route.params.cook,
+      menuItems: this.$route.params.menuItems,
+      group: null,
+      total: this.$route.params.total,
       loaded: false,
       paidFor: false,
       product: {
-        price: 777.77,
-        description: "leg lamp from that one movie",
-        img: "./assets/lamp.jpg"
+        price: this.$route.params.total,
+        description: "local food ordered",
+        img: null,
       }
     };
   },
   mounted: function() {
     const script = document.createElement("script");
     script.src =
-      "https://www.paypal.com/sdk/js?client-id=ARReLv-LJcOC813HUXOc_xsA6GajOhZPMgZ69QDVPZwAMPOTWVYXT2CPj6kk7fxM47bK2ymEV3oFD0Xi";
+    //&disable-funding=credit,card
+      "https://www.paypal.com/sdk/js?client-id=ARReLv-LJcOC813HUXOc_xsA6GajOhZPMgZ69QDVPZwAMPOTWVYXT2CPj6kk7fxM47bK2ymEV3oFD0Xi&disable-funding=credit";
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
   },
@@ -56,7 +77,7 @@ export default {
                   description: this.product.description,
                   amount: {
                     currency_code: "USD",
-                    value: this.product.price
+                    value: this.total
                   }
                 }
               ]
@@ -78,12 +99,14 @@ export default {
 </script>
 
 <style scoped>
-.mainContainer{
-    background-color: #74cae0;
-    padding: 10px;
-    box-shadow: 3px 5px 5px 5px;
+.mainContainer {
+  background-color: #74cae0;
+  padding: 10px;
 }
-.title{
-    text-align: center;
+.thankYou{
+  text-align: center;
+}
+.paid{
+  text-align: center;
 }
 </style>

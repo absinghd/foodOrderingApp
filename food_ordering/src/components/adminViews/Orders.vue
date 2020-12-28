@@ -31,7 +31,6 @@
             <v-list-item-title>Menu</v-list-item-title>
           </v-list-item>
 
-            <!-- <v-list-item @click="goCustomerHistory"> -->
             <v-list-item @click="gotoPastOrder">
             <v-list-item-icon>
               <v-icon>mdi-history</v-icon>
@@ -39,7 +38,12 @@
             <v-list-item-title>Past Orders</v-list-item-title>
           </v-list-item>
 
-
+            <v-list-item @click="gotoChefProfile">
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Profile</v-list-item-title>
+          </v-list-item>
 
             <v-list-item @click="logout">
             <v-list-item-icon>
@@ -172,6 +176,9 @@ export default {
             this.$router.push({ 
             name: "PastOrders"}) 
         },
+        gotoChefProfile(){
+            this.$router.push({ name: "ChefProfile" })
+    },  
         orderCompleted(order,e){
           //console.log(order.orderId);
           const db = firebase.firestore();
