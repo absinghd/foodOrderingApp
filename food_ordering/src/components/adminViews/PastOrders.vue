@@ -19,16 +19,16 @@
         >
           <v-list-item @click="gotoOrders">
             <v-list-item-icon>
-              <v-icon>mdi-cart-outline</v-icon>
+              <v-icon>mdi-home-variant</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Orders</v-list-item-title>
+            <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
           <v-list-item @click="gotoMenu">
             <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
+              <v-icon>mdi-clipboard-multiple</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Menu</v-list-item-title>
+            <v-list-item-title>Menu Items</v-list-item-title>
           </v-list-item>
 
             <v-list-item @click="gotoPastOrder">
