@@ -19,11 +19,30 @@
     </p>
 
 
+<div class="stripePayment">
+
+   <stripe-checkout
+    ref="checkoutRef"
+    :pk="this.publishableKey"
+    :items="this.items"
+    :successUrl="this.successUrl"
+    :cancelUrl="this.cancelUrl"
+  >
+    <template slot="checkout-button">
+      <v-btn @click="checkout">Shut up and take my money!</v-btn>
+    </template>
+  </stripe-checkout>
+
+
+</div>
+
 
   </v-app>
 </template>
 
 <script>
+import { StripeCheckout } from 'vue-stripe-checkout';
+
 export default {
   name: "StripePayment",
 
@@ -40,10 +59,27 @@ export default {
         price: this.$route.params.total,
         description: "local food ordered",
         img: null,
-          }
+          },
+      loading: false,
+    publishableKey: "pk_test_51HpQXOGDIrQvF26nD17QCjCkN6C1x5mjSxaMRFayrv86r1d9oqozLRd2PvxcooAUPfazVz3ohjs2nVLFVUeFJzi700Ju3ASAzb",
+    items: [
+      {
+        sku: 'sku_FdQKocNoVzznpJ', 
+        quantity: 1
+      }
+    ],
+    successUrl: 'https://www.google.com',
+    cancelUrl: 'https://www.yahoo.com',
        }
   },
-
+    components: {
+    StripeCheckout
+  },
+  methods: {
+      checkout () {
+      this.$refs.checkoutRef.redirectToCheckout();
+    }
+  },
 }
 </script>
 
