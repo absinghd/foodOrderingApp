@@ -94,4 +94,7 @@ export default {
 .paid{
   text-align: center;
 }
+.stripePayment{
+  text-align: center;
+}
 </style>

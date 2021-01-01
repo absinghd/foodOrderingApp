@@ -219,9 +219,9 @@ export default {
                
            })
            this.$store.commit("setCurrentOrder", this.menuItems)
-           console.log('original');
+           //console.log('original');
             //console.log(this.originalMenu);
-            console.log(this.cook);
+            //console.log(this.cook);
           this.$router.push({
         // //to the thank you page
         // name: "ThankYou",
